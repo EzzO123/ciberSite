@@ -1,5 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="by.usovich.service.Imp.PostServise" %>
-<%@ page import="by.usovich.dto.PostJson" %><%--
+<%@ page import="by.usovich.dto.PostJsonDto" %><%--
   Created by IntelliJ IDEA.
   User: yanus
   Date: 10.05.2017
@@ -15,8 +16,20 @@
 
 </head>
 <body>
+<c:forEach var="post" items="${posts}">
 
-Result :  -->[ ${onePost._titel} -- ${onePost._content} -- ${onePost._date}]<--
+    Result :  -->[ ${post.value._titel} -- ${post.value._content} -- ${post.value._date}]<--<br>
+
+</c:forEach>
+
+
+<div>
+    <form action="/getNews" method="post">
+        <input type="text" name="number"><<br>
+        <input type="checkbox" name="titel" value="dota"><span>Dota</span><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
 
 </body>
 </html>

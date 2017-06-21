@@ -1,17 +1,14 @@
 package by.usovich.service.Imp;
 
 import by.usovich.dao.IMP.PostDaoInterface;
-import by.usovich.dto.PostJson;
+import by.usovich.dto.PostJsonDto;
+import by.usovich.dto.PostsJsonDto;
 import by.usovich.entity.PostEntity;
-import by.usovich.entity.PostEntityForTest;
 import by.usovich.service.PostServiceInterface;
-import javafx.geometry.Pos;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.util.*;
 import java.util.LinkedList;
 
 
@@ -28,40 +25,37 @@ public class PostServise implements PostServiceInterface {
     @Autowired
     public PostDaoInterface PostDaoImp;
 
-    public LinkedList<PostJson> getPostAtNameGame(String nameTheme, int numberOfPosts) {
+    public PostsJsonDto getPostAtNameGame(String nameTheme, String numberOfPosts) {//получение множества постов
 
-        LinkedList<PostJson> posts = new LinkedList<PostJson>();//список постов для парса в Map(Controller)
+        int numberPosts = Integer.parseInt(numberOfPosts);
 
-        for(int i = 0;i<numberOfPosts;i++){
+        PostsJsonDto postsJsonDto = new PostsJsonDto();
 
-            //DAO.getPostEntity
-        }
+        if(getNameTablePost(nameTheme).equals("")){
 
-        return null;//DAO
-    }
-    public PostJson getPostAtNameGame(String nameTheme){//
+            //Debbug
 
-        System.out.println("2) : Service");
-        PostJson postJson = null;
+        }else {
 
-        if(getNameTablePost(nameTheme).equals("")) {
+            List postsEntity = null;//список постов для парса в Map(Controller)
+            postsEntity = PostDaoImp.getPostAtTitel(getNameTablePost(nameTheme));
 
-            //Debug
+            if(postsEntity == null){
 
-        }else{
-            PostEntity postEntityForTest = null;
-            postEntityForTest = PostDaoImp.getPostAtTitel(getNameTablePost(nameTheme));//Шаг 1:Получение Entity из БД
-
-            if(postEntityForTest == null) {
-
-                //Debug
+                //Debbug
 
             }else{
-                postJson = getPostEntityInPostJson(postEntityForTest);//Шаг 2:Парс Entity в DTO
+
+                for(Object obj:postsEntity) {
+                    postsJsonDto.putPost(getPostEntityInPostJson((PostEntity)obj));
+                }
             }
+
         }
-        System.out.println("5) : Service(return)");
-        return postJson;
+
+
+
+        return postsJsonDto;//DAO
     }
 
 
@@ -84,12 +78,12 @@ public class PostServise implements PostServiceInterface {
     }
 
     //Получение из PostEntity в PostJson
-    private PostJson getPostEntityInPostJson(PostEntity postEntity){
+    private PostJsonDto getPostEntityInPostJson(PostEntity postEntity){
 
         if(false){
             return null;
         }else{
-            return new PostJson(postEntity.get_titel(),postEntity.get_content(),
+            return new PostJsonDto(postEntity.get_titel(),postEntity.get_content(),
                     postEntity.get_date(),postEntity.get_image());
         }
 
@@ -97,40 +91,10 @@ public class PostServise implements PostServiceInterface {
 
 
 
-    public void addJson(PostJson post, LinkedList<PostJson> posts) {
+    public void addJson(PostJsonDto post, LinkedList<PostJsonDto> posts) {
 
         posts.add(post);
 
     }
 
 }
-
-//    JSONArray jsonArray = new JSONArray();
-//    JSONObject object_1;
-//    JSONObject object_2;
-//    JSONObject object_3;
-//
-//       object_1 = new JSONObject();
-//               object_2 = new JSONObject();
-//               object_3 = new JSONObject();
-//
-//               try{
-//
-//               object_1.put("titel",post_1.get_titel());
-//               object_1.put("content",post_1.get_content());
-//
-//               object_2.put("titel",post_2.get_titel());
-//               object_2.put("content",post_2.get_content());
-//
-//               object_3.put("titel",post_3.get_titel());
-//               object_3.put("content",post_3.get_content());
-//
-//               jsonArray.put(object_1);
-//               jsonArray.put(object_2);
-//               jsonArray.put(object_3);
-//
-//
-//               }catch (JSONException exception){
-//
-//               System.out.printf("" + exception);
-//               }

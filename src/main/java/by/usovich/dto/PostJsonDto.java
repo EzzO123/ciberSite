@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by yanus on 15.05.2017.
  */
-public class PostJson {
+public class PostJsonDto {
 
     private String _titel;
 
@@ -19,7 +19,7 @@ public class PostJson {
     private String _image;
 
 
-    public PostJson(String titel, String content, String date,String image) {
+    public PostJsonDto(String titel, String content, String date, String image) {
         this._titel = titel;
         this._content = content;
         this._date = date;
@@ -53,7 +53,7 @@ public class PostJson {
         this._content = content;
     }
 
-    public String String() {
+    public String get_date() {
         return _date;
     }
 

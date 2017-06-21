@@ -1,7 +1,8 @@
 package by.usovich.service;
 
-import by.usovich.dto.PostJson;
-import org.json.JSONArray;
+import by.usovich.dao.IMP.PostDaoInterface;
+import by.usovich.dto.PostJsonDto;
+import by.usovich.dto.PostsJsonDto;
 
 import java.util.LinkedList;
 
@@ -10,8 +11,6 @@ import java.util.LinkedList;
  */
 public interface PostServiceInterface {
 
-    public LinkedList<PostJson> getPostAtNameGame(String nameTheme, int numberOfPosts);
-
-    public PostJson getPostAtNameGame(String nameTheme);
+    public PostsJsonDto getPostAtNameGame(String nameTheme, String numberOfPosts);
 
 }
