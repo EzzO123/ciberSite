@@ -25,8 +25,8 @@ public class PostDao implements PostDaoInterface {
 
     public List getPostAtTitel(String titel) {
 
-        System.out.println("3) : DAO");
-        System.out.println("3) : DAO(titel : " + titel + ")");
+
+        System.out.println("DAO(titel : " + titel + ")");
         String postHQL = "FROM PostEntity WHERE post_titel=:titel";
 
         //titel = "tableDOTA";

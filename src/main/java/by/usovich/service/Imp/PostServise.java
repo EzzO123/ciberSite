@@ -5,6 +5,7 @@ import by.usovich.dto.PostJsonDto;
 import by.usovich.dto.PostsJsonDto;
 import by.usovich.entity.PostEntity;
 import by.usovich.service.PostServiceInterface;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,8 @@ public class PostServise implements PostServiceInterface {
     @Autowired
     public PostDaoInterface PostDaoImp;
 
+    private static final Logger log = Logger.getLogger(PostServise.class);
+
     public PostsJsonDto getPostAtNameGame(String nameTheme, String numberOfPosts) {//получение множества постов
 
         int numberPosts = Integer.parseInt(numberOfPosts);
@@ -35,6 +38,7 @@ public class PostServise implements PostServiceInterface {
 
             //Debbug
 
+
         }else {
 
             List postsEntity = null;//список постов для парса в Map(Controller)
@@ -42,12 +46,24 @@ public class PostServise implements PostServiceInterface {
 
             if(postsEntity == null){
 
-                //Debbug
+                log.error("Сущность не получена");
 
             }else{
 
-                for(Object obj:postsEntity) {
-                    postsJsonDto.putPost(getPostEntityInPostJson((PostEntity)obj));
+                log.info("Сущность получена");
+
+                for(int temp = 0;temp < numberPosts;temp++){//получение последних постов добавленных в БД
+
+                    int sizeList = postsEntity.size();
+
+                    if(sizeList < numberPosts){
+
+
+                        numberPosts = numberPosts - (numberPosts - sizeList);
+
+                    }
+
+                    postsJsonDto.putPost(getPostEntityInPostJson((PostEntity) postsEntity.get(sizeList-temp-1)));//Получение из списка ENITITYpost в DTOpost
                 }
             }
 
