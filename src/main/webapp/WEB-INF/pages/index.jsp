@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="by.usovich.service.Imp.PostServise" %>
-<%@ page import="by.usovich.dto.PostJsonDto" %><%--
+<%@ page import="by.usovich.service.Imp.NewsServiseImplement" %>
+<%@ page import="by.usovich.dto.NewsDto.NewsDto" %><%--
   Created by IntelliJ IDEA.
   User: yanus
   Date: 10.05.2017
@@ -20,9 +20,14 @@
     <script type="text/javascript">
         function doAjax() {
 
-            var inputTitel = $("#titel").val();
+            var inputTitel  = $("#titel").val();
             var inputNumber = $("#number").val();
 
+
+
+
+
+            //ToDo
             $.ajax({
 
                 url : 'http://localhost:8080/getNews',
@@ -59,7 +64,10 @@
 <div style="float: left">
     <form action="/index" method="post">
         <input type="text" name="number"><<br>
-        <input type="checkbox" name="titel" value="dota"><span>Dota</span><br>
+        <input name="titel" type="checkbox"  value="dota" ><span>Dota</span><br>
+        <input NAME="titel" type="checkbox"  value="cs"><span>cs</span><br>
+        <input NAME="titel" type="checkbox"  value="wot"><span>wot</span><br>
+        <input NAME="titel" type="checkbox"  value="paragon"><span>paragon</span><br>
         <button type="submit">Submit</button>
     </form>
 </div>
@@ -73,9 +81,9 @@
 
 <div style="float: left">
 
-        <input id="number" type="text"><<br>
-        <input id="titel" type="checkbox"  value="dota"><span>Dota</span><br>
-        <input type="button" value="Ajax" onclick="doAjax()">
+    <input id="number" type="text"><<br>
+    <input id="titel" type="checkbox"  value="dota"><span>Dota</span><br>
+    <input type="button" value="Ajax" onclick="doAjax()">
 
 </div>
 

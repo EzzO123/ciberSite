@@ -1,4 +1,4 @@
-package by.usovich.dto;
+package by.usovich.dto.LoginAndRegDto;
 
 /**
  * Created by yanus on 7/11/2017.

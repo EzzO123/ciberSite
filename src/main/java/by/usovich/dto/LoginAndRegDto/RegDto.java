@@ -1,29 +1,35 @@
-package by.usovich.dto;
+package by.usovich.dto.LoginAndRegDto;
 
 /**
  * Created by yanus on 7/13/2017.
  */
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
 public class RegDto {
 
     private String login;
     private String email;
     private String password;
     private String repassword;
-    private LinkedList<String> games;
     private String country;
 
+    private Map games =  new HashMap<String,String>();
 
 
     public RegDto() {
+
+        games.put("dota",0 + "");
+        games.put("cs",0 + "");
+        games.put("paragon",0 + "");
+        games.put("wot",0 + "");
+
     }
 
-    public RegDto(String nick, String email, String password, String repassword, String game, String country) {
+    public RegDto(String nick, String email, String password, String repassword, String country) {
         this.login = nick;
         this.email = email;
         this.password = password;
         this.repassword = repassword;
-        this.games.add(game);
         this.country = country;
     }
 
@@ -59,19 +65,21 @@ public class RegDto {
         this.repassword = repassword;
     }
 
-    public String getGame(int index) {
-        return games.get(index);
+    public String getGame(String key) {
+        return games.get(key).toString();
     }
 
-    public LinkedList<String> getGames() {return games;}
 
-    public void setGame(String game) {
-        this.games.add(game);
-    }
 
     public String getCountry() {return country;}
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountry(String country) {this.country = country;}
+
+    public String toStringForGames(){
+
+        return games.toString();
+
     }
+
+
 }

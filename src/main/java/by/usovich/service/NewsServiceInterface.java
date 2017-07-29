@@ -1,12 +1,12 @@
 package by.usovich.service;
 
-import by.usovich.dto.PostsJsonDto;
+import by.usovich.dto.NewsDto.NewsJsonDto;
 
 /**
  * Created by yanus on 15.05.2017.
  */
-public interface PostServiceInterface {
+public interface NewsServiceInterface {
 
-    public PostsJsonDto getPostAtNameGame(String nameTheme, String numberOfPosts);
+    public NewsJsonDto getPostAtNameGame(String nameTheme, String numberOfPosts);
 
 }

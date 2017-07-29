@@ -1,10 +1,10 @@
 package by.usovich.service.Imp;
 
-import by.usovich.dao.PostDaoInterface;
-import by.usovich.dto.PostDto;
-import by.usovich.dto.PostsJsonDto;
-import by.usovich.entity.PostEntity;
-import by.usovich.service.PostServiceInterface;
+import by.usovich.dao.NewsDaoInterface;
+import by.usovich.dto.NewsDto.NewsDto;
+import by.usovich.dto.NewsDto.NewsJsonDto;
+import by.usovich.entity.NewsEntity;
+import by.usovich.service.NewsServiceInterface;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,20 +19,20 @@ import java.util.LinkedList;
  * Created by yanus on 15.05.2017.
  */
 @Service("postService")
-public class PostServiseImplement implements PostServiceInterface {
+public class NewsServiseImplement implements NewsServiceInterface {
 
 
 
     @Autowired
-    public PostDaoInterface PostDaoImp;
+    public NewsDaoInterface PostDaoImp;
 
-    private static final Logger log = Logger.getLogger(PostServiseImplement.class);
+    private static final Logger log = Logger.getLogger(NewsServiseImplement.class);
 
-    public PostsJsonDto getPostAtNameGame(String nameTheme, String numberOfPosts) {//получение множества постов
+    public NewsJsonDto getPostAtNameGame(String nameTheme, String numberOfPosts) {//получение множества постов
 
         int numberPosts = Integer.parseInt(numberOfPosts);
 
-        PostsJsonDto postsJsonDto = new PostsJsonDto();
+        NewsJsonDto postsJsonDto = new NewsJsonDto();
 
         if(getNameTablePost(nameTheme).equals("")){
 
@@ -63,7 +63,7 @@ public class PostServiseImplement implements PostServiceInterface {
 
                     }
 
-                    postsJsonDto.putPost(getPostEntityInPostDto((PostEntity) postsEntity.get(sizeList-temp-1)));//Получение из списка ENITITYpost в DTOpost
+                    postsJsonDto.putPost(getPostEntityInPostDto((NewsEntity) postsEntity.get(sizeList-temp-1)));//Получение из списка ENITITYpost в DTOpost
                 }
             }
 
@@ -94,12 +94,12 @@ public class PostServiseImplement implements PostServiceInterface {
     }
 
     //Получение из PostEntity в PostJson
-    private PostDto getPostEntityInPostDto(PostEntity postEntity){
+    private NewsDto getPostEntityInPostDto(NewsEntity postEntity){
 
         if(false){
             return null;
         }else{
-            return new PostDto(postEntity.get_titel(),postEntity.get_content(),
+            return new NewsDto(postEntity.get_titel(),postEntity.get_content(),
                     postEntity.get_date(),postEntity.get_image());
         }
 
@@ -107,7 +107,7 @@ public class PostServiseImplement implements PostServiceInterface {
 
 
 
-    public void addJson(PostDto post, LinkedList<PostDto> posts) {
+    public void addJson(NewsDto post, LinkedList<NewsDto> posts) {
 
         posts.add(post);
 

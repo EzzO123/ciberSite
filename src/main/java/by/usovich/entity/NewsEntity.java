@@ -10,26 +10,27 @@ import java.util.Date;
 
 @Entity
 @Table(name = "post")
-public class PostEntity implements Serializable {
+public class NewsEntity implements Serializable {
 
 
     @Id
-    @Column(name = "post_id")
+    @Column(name = "news_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int _id;
 
-    @Column(name = "post_titel")
+    @Column(name = "news_titel")
     private String _titel;
 
-    @Column(name = "post_content")
+    @Column(name = "news_content")
     private String _content;
 
-    @Column(name = "post_date")
+
+    //ToDo//Need use type Date
+    @Column(name = "news_date")
     private String _date;
 
-    @Column(name = "post_image")
+    @Column(name = "news_image")
     private String _image;
-
 
     public int get_id() {
         return _id;
@@ -71,3 +72,4 @@ public class PostEntity implements Serializable {
         this._image = _image;
     }
 }
+

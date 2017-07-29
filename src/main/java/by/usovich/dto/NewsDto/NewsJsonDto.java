@@ -1,4 +1,4 @@
-package by.usovich.dto;
+package by.usovich.dto.NewsDto;
 
 
 

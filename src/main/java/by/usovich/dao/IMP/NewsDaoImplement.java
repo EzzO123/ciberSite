@@ -1,25 +1,21 @@
 package by.usovich.dao.IMP;
 
-import by.usovich.dao.PostDaoInterface;
-import by.usovich.entity.PostEntity;
+import by.usovich.dao.NewsDaoInterface;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
-import javax.management.Query;
 import java.util.*;
 
 /**
  * Created by yanus on 15.05.2017.
  */
-@Repository("postDaoImp")
+@Repository("newsDaoImp")
 @Transactional
-public class PostDaoImplement implements PostDaoInterface {
+public class NewsDaoImplement implements NewsDaoInterface {
 
     @Resource(name = "sessionFactory")
     public SessionFactory sessionFactory;
@@ -28,7 +24,7 @@ public class PostDaoImplement implements PostDaoInterface {
 
 
         System.out.println("DAO(titel : " + titel + ")");
-        String postHQL = "FROM PostEntity WHERE post_titel=:titel";
+        String postHQL = "FROM NewsEntity WHERE news_titel=:titel";
 
         //titel = "tableDOTA";
         List postEntity = null;

@@ -1,8 +1,8 @@
 package by.usovich.controllers;
 
 
-import by.usovich.dto.PostDto;
-import by.usovich.service.PostServiceInterface;
+import by.usovich.dto.NewsDto.NewsDto;
+import by.usovich.service.NewsServiceInterface;
 import java.util.*;
 
 import org.apache.log4j.Logger;
@@ -22,15 +22,15 @@ import javax.servlet.http.HttpSession;
 
 
 @Controller
-public class PostController {
+public class NewsController {
 
     //private final Logger;
 
     @Autowired
-    public PostServiceInterface postServiceImp;
+    public NewsServiceInterface postServiceImp;
 
 
-    private static final Logger log = Logger.getLogger(PostController.class);
+    private static final Logger log = Logger.getLogger(NewsController.class);
 
     @RequestMapping(value = "/index",method = RequestMethod.POST)
     public String getNewPageWithNews(@RequestParam String titel,@RequestParam String number, HttpSession session, Model model){
@@ -41,13 +41,20 @@ public class PostController {
         return "index";
     }
 
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    public String getNewPage( HttpSession session, Model model){
+
+
+        return "index";
+    }
+
 
     @RequestMapping(value = "/getNews",method = RequestMethod.GET)
     public @ResponseBody
    // Map<String,PostJsonDto> getNews(@RequestParam("titel") String titel, @RequestParam("number") String number, HttpSession session, Model model){
     String getNews(@RequestParam() String titel, @RequestParam() String number, HttpSession session, Model model){
 
-        Map<String,PostDto> response = null;
+        Map<String,NewsDto> response = null;
 
         return postServiceImp.getPostAtNameGame(titel,number).getJsonArray().toString();
     }
