@@ -1,5 +1,6 @@
 package by.usovich.dao.IMP;
 
+import by.usovich.dao.PostDaoInterface;
 import by.usovich.entity.PostEntity;
 
 import org.apache.log4j.Logger;
@@ -18,7 +19,7 @@ import java.util.*;
  */
 @Repository("postDaoImp")
 @Transactional
-public class PostDao implements PostDaoInterface {
+public class PostDaoImplement implements PostDaoInterface {
 
     @Resource(name = "sessionFactory")
     public SessionFactory sessionFactory;

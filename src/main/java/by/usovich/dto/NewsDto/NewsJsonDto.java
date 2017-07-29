@@ -7,20 +7,20 @@ import org.json.*;
 /**
  * Created by yanus on 6/17/2017.
  */
-public class PostsJsonDto{
+public class NewsJsonDto {
 
-    public PostsJsonDto() {
+    public NewsJsonDto() {
     }
 
 
     int counter = 0;
-    Map<String,PostJsonDto> map = new LinkedHashMap<String, PostJsonDto>();
+    Map<String,NewsDto> map = new LinkedHashMap<String, NewsDto>();
 
     JSONArray jsonArray = new JSONArray();
 
 
 
-    public Map<String, PostJsonDto> getMap() {
+    public Map<String, NewsDto> getMap() {
 
         return map;
     }
@@ -29,21 +29,21 @@ public class PostsJsonDto{
         return jsonArray;
     }
 
-    public void putPost(PostJsonDto post){
+    public void putPost(NewsDto post){
 
         putPostInMap(post);
         putPostInJson(post);
 
     }
 
-    public void putPostInMap (PostJsonDto post){
+    public void putPostInMap (NewsDto post){
 
 
         map.put(counter + "",post);
         counter++;
     }
 
-    public void putPostInJson (PostJsonDto post){
+    public void putPostInJson (NewsDto post){
         try {
            // jsonObject.put("Id", counter + "");
             JSONObject jsonObject = new JSONObject();

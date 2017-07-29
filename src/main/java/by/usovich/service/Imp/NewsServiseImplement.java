@@ -1,7 +1,7 @@
 package by.usovich.service.Imp;
 
-import by.usovich.dao.IMP.PostDaoInterface;
-import by.usovich.dto.PostJsonDto;
+import by.usovich.dao.PostDaoInterface;
+import by.usovich.dto.PostDto;
 import by.usovich.dto.PostsJsonDto;
 import by.usovich.entity.PostEntity;
 import by.usovich.service.PostServiceInterface;
@@ -19,14 +19,14 @@ import java.util.LinkedList;
  * Created by yanus on 15.05.2017.
  */
 @Service("postService")
-public class PostServise implements PostServiceInterface {
+public class PostServiseImplement implements PostServiceInterface {
 
 
 
     @Autowired
     public PostDaoInterface PostDaoImp;
 
-    private static final Logger log = Logger.getLogger(PostServise.class);
+    private static final Logger log = Logger.getLogger(PostServiseImplement.class);
 
     public PostsJsonDto getPostAtNameGame(String nameTheme, String numberOfPosts) {//получение множества постов
 
@@ -63,7 +63,7 @@ public class PostServise implements PostServiceInterface {
 
                     }
 
-                    postsJsonDto.putPost(getPostEntityInPostJson((PostEntity) postsEntity.get(sizeList-temp-1)));//Получение из списка ENITITYpost в DTOpost
+                    postsJsonDto.putPost(getPostEntityInPostDto((PostEntity) postsEntity.get(sizeList-temp-1)));//Получение из списка ENITITYpost в DTOpost
                 }
             }
 
@@ -94,12 +94,12 @@ public class PostServise implements PostServiceInterface {
     }
 
     //Получение из PostEntity в PostJson
-    private PostJsonDto getPostEntityInPostJson(PostEntity postEntity){
+    private PostDto getPostEntityInPostDto(PostEntity postEntity){
 
         if(false){
             return null;
         }else{
-            return new PostJsonDto(postEntity.get_titel(),postEntity.get_content(),
+            return new PostDto(postEntity.get_titel(),postEntity.get_content(),
                     postEntity.get_date(),postEntity.get_image());
         }
 
@@ -107,7 +107,7 @@ public class PostServise implements PostServiceInterface {
 
 
 
-    public void addJson(PostJsonDto post, LinkedList<PostJsonDto> posts) {
+    public void addJson(PostDto post, LinkedList<PostDto> posts) {
 
         posts.add(post);
 

@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by yanus on 15.05.2017.
  */
-public class PostJsonDto {
+public class NewsDto {
 
     private String _titel;
 
@@ -19,23 +19,12 @@ public class PostJsonDto {
     private String _image;
 
 
-    public PostJsonDto(String titel, String content, String date, String image) {
+    public NewsDto(String titel, String content, String date, String image) {
         this._titel = titel;
         this._content = content;
         this._date = date;
         this._image = image;
     }
-
-
-    //Создание объекта json
-    // JSONObject obj=new JSONObject();        //Кодирование объекта json
-    // obj.put("name"," Иванов Михаил");
-    // obj.put("age",new Integer(21));        //Декодирование объекта json
-    //   System.out.println("Name:"+obj.get("name"));
-    // System.out.println("Age:"+obj.get("age"));
-
-
-    //public  getPostJson(){}
 
     public String get_titel() {
         return _titel;

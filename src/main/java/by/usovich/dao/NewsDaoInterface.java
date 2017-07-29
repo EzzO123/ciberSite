@@ -1,4 +1,4 @@
-package by.usovich.dao.IMP;
+package by.usovich.dao;
 
 import by.usovich.entity.PostEntity;
 
