@@ -47,8 +47,9 @@ public class RegistController {
 
         userServiseImp.isPasswordExists(regDto.getPassword());
 
+        userServiseImp.createUser(regDto);
 
-
+        //userServiseImp.deleteUser(regDto);
 
 //        if(!userServiseImp.isLoginExists(regDto.getLogin())){
 //
@@ -68,6 +69,6 @@ public class RegistController {
     public String emptyUrl(HttpSession session, Model model) {
 
 
-        return "regis";
+        return "index";
     }
 }

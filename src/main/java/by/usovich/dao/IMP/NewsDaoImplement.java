@@ -20,7 +20,7 @@ public class NewsDaoImplement implements NewsDaoInterface {
     @Resource(name = "sessionFactory")
     public SessionFactory sessionFactory;
 
-    public List getPostAtTitel(String titel) {
+    public List getNewsAtTitel(String titel) {
 
 
         System.out.println("DAO(titel : " + titel + ")");

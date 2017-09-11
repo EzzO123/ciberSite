@@ -9,7 +9,7 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "post")
+@Table(name = "news")
 public class NewsEntity implements Serializable {
 
 
@@ -29,7 +29,7 @@ public class NewsEntity implements Serializable {
     @Column(name = "news_date")
     private String _date;
 
-    @Column(name = "news_image")
+    @Column(name = "news_refImage")
     private String _image;
 
     public int get_id() {

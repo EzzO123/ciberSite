@@ -16,7 +16,7 @@ public class RegDto {
     private Map games =  new HashMap<String,String>();
 
 
-    public RegDto() {
+    public RegDto(){
 
         games.put("dota",0 + "");
         games.put("cs",0 + "");
@@ -31,6 +31,8 @@ public class RegDto {
         this.password = password;
         this.repassword = repassword;
         this.country = country;
+
+
     }
 
     public String getLogin() {

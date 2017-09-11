@@ -10,18 +10,22 @@ import java.util.Date;
  */
 public class NewsDto {
 
+
     private String _titel;
 
     private String _content;
+
+    private String _newsId;
 
     private String _date;
 
     private String _image;
 
 
-    public NewsDto(String titel, String content, String date, String image) {
+    public NewsDto(String titel, String content, String date, String image,String newsId) {
         this._titel = titel;
         this._content = content;
+        this._newsId = newsId;
         this._date = date;
         this._image = image;
     }
@@ -56,5 +60,11 @@ public class NewsDto {
 
     public void set_image(String _image) {
         this._image = _image;
+    }
+
+    public String get_newsId() {return _newsId;}
+
+    public void set_newsId(String _newsId) {
+        this._newsId = _newsId;
     }
 }

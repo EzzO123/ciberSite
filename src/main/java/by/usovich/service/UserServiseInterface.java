@@ -1,5 +1,8 @@
 package by.usovich.service;
 
+import by.usovich.dto.LoginAndRegDto.LoginDto;
+import by.usovich.dto.LoginAndRegDto.RegDto;
+import by.usovich.dto.UserDto;
 import by.usovich.entity.UserEntity;
 
 /**
@@ -13,7 +16,7 @@ public interface UserServiseInterface {
 
     public boolean isPasswordExists(String password);
 
-    void createUser(UserEntity profile);
+    void createUser(RegDto profile);
 
-    void deleteUser(UserEntity profile);
+    void deleteUser(UserDto profile);
 }

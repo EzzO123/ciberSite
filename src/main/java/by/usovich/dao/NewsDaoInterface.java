@@ -7,6 +7,6 @@ import java.util.*;
  */
 public interface NewsDaoInterface {
 
-    public List getPostAtTitel(String nameGameTable);
+    public List getNewsAtTitel(String nameGameTable);
 
 }

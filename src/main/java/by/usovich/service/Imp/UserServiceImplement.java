@@ -1,21 +1,23 @@
 package by.usovich.service.Imp;
 
 import by.usovich.dao.UserDaoInterface;
-import by.usovich.dto.LoginAndRegDto.LoginDto;
 import by.usovich.dto.LoginAndRegDto.RegDto;
+import by.usovich.dto.UserDto;
+import by.usovich.entity.GamesEntity;
 import by.usovich.entity.UserEntity;
 import by.usovich.service.UserServiseInterface;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.*;
 
 /**
  * Created by yanus on 7/11/2017.
  */
 @Service
-public class UserServiseImplement implements UserServiseInterface {
+public class UserServiceImplement implements UserServiseInterface {
 
-    public  Logger log = Logger.getLogger(UserServiseImplement.class);
+    public  Logger log = Logger.getLogger(UserServiceImplement.class);
 
     @Autowired
     public UserDaoInterface userDaoImp;
@@ -57,17 +59,29 @@ public class UserServiseImplement implements UserServiseInterface {
         }
     }
 
+
     @Override
-    public void createUser(UserEntity profile) {
+    public void deleteUser(UserDto userDto) {
+
+       UserEntity userEntityFromBD = (UserEntity) userDaoImp.getUserEntityByLogin(userDto.getLogin()).get(0);
+
+       userDaoImp.deleteUser(userEntityFromBD);
 
     }
 
-    @Override
-    public void deleteUser(UserEntity profile) {
-
+    private boolean hadleListFromBD(List list) {
+        if(!(list == null)){
+            log.info("Find Entity in BD");
+            return true;
+        }else{
+            log.info("Not Find Entity in BD");
+            return false;
+        }
     }
 
 
+
+    @Override
     public void createUser(RegDto regDto) {
 
         UserEntity userEntity  = new UserEntity();
@@ -76,11 +90,23 @@ public class UserServiseImplement implements UserServiseInterface {
         userEntity.set_password(regDto.getPassword());
         userEntity.set_email(regDto.getEmail());
         userEntity.set_country(regDto.getCountry());
-       // userEntity.set_games();
-    }
 
 
-    public void deleteUser(LoginDto profile) {
+        GamesEntity gamesEntity = new GamesEntity();
 
-    }
+        gamesEntity.setUserEntity(userEntity);
+
+        userEntity.set_games(gamesEntity);
+
+
+
+       // userDaoImp.createGames(gamesEntity);
+
+        userDaoImp.createUser(userEntity);
+
+
+}
+
+
+
 }

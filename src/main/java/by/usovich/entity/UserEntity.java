@@ -16,19 +16,13 @@ public class UserEntity implements Serializable {
 
 
     //ToDo Error in BD
+    @OneToOne(cascade = CascadeType.ALL) // устанавливаем связь с классом/таблицец UserEntity
+    @JoinColumn(name="fk_games_id")
     private GamesEntity games;
     //    @OneToOne
-//    @JoinColumn(name = "fk_user_id", referencedColumnName = "games_id")
-    @OneToOne(mappedBy = "user") // устанавливаем связь с классом/таблицец UserEntity
 
-    public int getGames_id() {
-        return games_id;
-    }
-
-    public void setGames_id(int games_id) {
-        this.games_id = games_id;
-    }
-
+    @OneToOne(mappedBy = "user")
+    private MessageEntity messageEntity;
 
 
 
@@ -37,7 +31,7 @@ public class UserEntity implements Serializable {
     }
 
     @Id
-    @Column(name = "user_id", nullable = false, insertable = true, updatable = true)
+    @Column(name = "user_id",updatable = true,insertable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int _id;
 
@@ -54,13 +48,19 @@ public class UserEntity implements Serializable {
     @Column(name = "user_country")
     private String _country;
 
+    @Column(name = "fk_games_id",insertable = false,updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected int fk_games_id;
 
+    public int getFk_games_id() {
+        return fk_games_id;
+    }
 
+    public void setFk_games_id(int fk_games_id) {
+        this.fk_games_id = fk_games_id;
+    }
 
-    @Column(name = "fk_games_id", nullable = false, insertable = false, updatable = false)
-    private int games_id;
-
-   // @OneToOne(cascade = CascadeType.ALL,targetEntity = GamesEntity.class)
+    // @OneToOne(cascade = CascadeType.ALL,targetEntity = GamesEntity.class)
 
     //@OneToOne(cascade = CascadeType.ALL,mappedBy = "user") // устанавливаем связь с классом/таблицец UserEntity
 
@@ -111,7 +111,6 @@ public class UserEntity implements Serializable {
     }
 
 
-    @Column(name = "fk_ad_id", nullable = false, insertable = false, updatable = false)
     public GamesEntity get_games() {
         return games;
     }

@@ -36,7 +36,7 @@ public class NewsController {
     public String getNewPageWithNews(@RequestParam String titel,@RequestParam String number, HttpSession session, Model model){
 
 
-        model.addAttribute("posts",postServiceImp.getPostAtNameGame(titel,number).getMap());
+        model.addAttribute("posts",postServiceImp.getNewsAtNameGame(titel,number).getMap());
 
         return "index";
     }
@@ -52,15 +52,62 @@ public class NewsController {
     @RequestMapping(value = "/getNews",method = RequestMethod.GET)
     public @ResponseBody
    // Map<String,PostJsonDto> getNews(@RequestParam("titel") String titel, @RequestParam("number") String number, HttpSession session, Model model){
-    String getNews(@RequestParam() String titel, @RequestParam() String number, HttpSession session, Model model){
+    String getNewsGet(@RequestParam() String titel, @RequestParam() String number, HttpSession session, Model model){
 
         Map<String,NewsDto> response = null;
 
-        return postServiceImp.getPostAtNameGame(titel,number).getJsonArray().toString();
+        return postServiceImp.getNewsAtNameGame(titel,number).getJsonArray().toString();
     }
 
 
+    @RequestMapping(value = "/getNews",method = RequestMethod.POST,produces = "application/json")
+        // Map<String,PostJsonDto> getNews(@RequestParam("titel") String titel, @RequestParam("number") String number, HttpSession session, Model model){
+   public @ResponseBody  String getNewsPostAtNumber(@RequestParam(name = "titel") String titel, @RequestParam(name = "numberNews") String newsDeriction, HttpSession session){
+
+        Map<String,NewsDto> response = null;
+
+        String number = "3";
+
+        titel = "dota";
+
+        String string = postServiceImp.getNewsAtNameGame(titel,number).getJsonArray().toString();
+
+        return string;
+    }
+
+    @RequestMapping(value = "/getNews",method = RequestMethod.POST,produces = "application/json")
+    public @ResponseBody  String getNewsPostAtDeriction(@RequestParam(name = "titel") String titel, @RequestParam(name = "newsDeriction") String newsDeriction, HttpSession session){
+
+       int numInt = 0;//В сессию
+       String numStr = "0";
+
+       //ToDo
 
 
+        String string = postServiceImp.getNewsAtNameGame(titel,numStr).getJsonArray().toString();//for debbug
+
+        return string;
+    }
+
+    @RequestMapping(value = "/getNewsForCibersite",method = RequestMethod.POST,produces = "application/json")
+    public @ResponseBody  String getNewsPostTesting(@RequestParam(name = "theme") String theme, @RequestParam(name = "page") String newsDeriction,
+                                                    @RequestParam(name = "newsPerPage") String newsPerPage, HttpSession session){
+
+
+
+        if(session.getAttribute("indexNews") == null){
+            session.setAttribute("indexNews",-3);
+        }
+
+
+        //ToDo
+
+
+        String string = postServiceImp.getNewsAtNameGame(theme,newsDeriction,newsPerPage,session).getJsonArray().toString();//for debbug
+
+
+
+        return string;
+    }
 
 }

@@ -1,90 +1,243 @@
-var resultTempForNewsBlock = `<div class="news__item">
-                      <div class="news__img"><img alt="imf cyber" src="http://mulehorngaming.com/wp-content/uploads/2015/12/gamer-wallpaperswallpaper-gamer-controllers-artwork-gamer-wallpaper-gamingholic-g1unpxck.jpg"></div>
-                      <div class="news_tag">Новости</div>
-                      <h4 class="news__header">Riot Games перестала принимать заявки на тестовый сервер</h4>
-                      <p class="news__preview-text">
-                       Компания Riot Games временно закрыла регистрацию на тестовый сервер League of Legends. Согласно анонсу, решение связано с плохой работой сайта PBE (Public Beta Environment). Riot Games возобновит прием заявок после того, как портал приведут в рабочее состояние.
-                      </p><span class="news__data">04.02.2017</span>
-                    </div>
-                    <div class="news__item">
-                      <div class="news__img"><img alt="imf cyber" src="http://mulehorngaming.com/wp-content/uploads/2015/12/gamer-wallpaperswallpaper-gamer-controllers-artwork-gamer-wallpaper-gamingholic-g1unpxck.jpg"></div>
-                      <div class="news_tag">Новости</div>
-                      <h4 class="news__header">Selfless распустила состав по CS:GO 
-По материалам киберспортивного портала CyberSport.ru</h4>
-                      <p class="news__preview-text">
-                        Организация Selfless Gaming распустила состав по Counter-Strike: Global Offensive. Три киберспортсмена продолжат играть вместе. Информация была опубликована на официальном сайте организации.
-По материалам киберспортивного портала CyberSport.ru
-                      </p><span class="news__data">04.02.2017</span>
-                    </div>
-                    <div class="news__item">
-                      <div class="news__img"><img alt="imf cyber" src="http://mulehorngaming.com/wp-content/uploads/2015/12/gamer-wallpaperswallpaper-gamer-controllers-artwork-gamer-wallpaper-gamingholic-g1unpxck.jpg"></div>
-                      <div class="news_tag">Новости</div>
-                      <h4 class="news__header">Andi: «Командам из СНГ не хватает дисциплины и коммуникации»</h4>
-                      <p class="news__preview-text">
-                        Новый тренер Natus Vincere G2A Андрей «Andi» Прохоров в интервью GameInside.ua рассказал, как он попал в организацию, какие у него обязанности в коллективе
-                      </p><span class="news__data">04.02.2017</span>
-                    </div>`;
-
-
+// use strict;
 
 $(document).ready(function() {
-    //Обновление новосте при нажатии на стрелки
-    (function () {
-        var newsDeriction = 'next';
-        var isLoaded = true;
-        // При нажатии на стрелки в блоке новостей отправка ajax за след/пред новостями
-        $(".news").on("click", function (e) {
+
+  //Обновление новосте при нажатии на стрелки. Доделать
+  (function () {
+      const pageTitle = {
+          cs: "CS GO",
+          paragon: "Paragon",
+          dota: "Dota 2",
+          wot: "World of tanks"
+      }
+
+      var pageTitleId = $('.page-container').attr('data-id-game'),
+          newsPageDirectly = 'next',
+          latestArrow,
+          isLoaded = true;
+
+      localStorage.clear();
+      console.log('localStorage  length ', localStorage.length);
+
+      if (localStorage.length !== 0) {
+          newsPageDirectly = localStorage.getItem('pageNumber');
+          console.log('pageNumber from store ', localStorage.getItem('pageNumber'));
+      }
+      // Когда страница загр. делаем запрос на первую стр новостей
+     /*
+      $(document).ready(function(e) {
             if (!isLoaded) return;
-            var headerHeight = $(".news__header").css("height");
-            var newsContainer = $(".news__container");
-            var newsPosts = $(".news__container").children();
-            var arrowDeriction = e.target.parentNode;
-            var arrowClassName = arrowDeriction.className;
+            var headerHeight = $(".news__header").css("height"),
+                newsContainer = $(".news__container"),
+                newsPosts = newsContainer.children(),
+                pageInfo,
+                sendNewsParams;
 
-            if (arrowClassName == "news__arrow-l") {
-                newsDeriction = 'priv';
-                sendAjaxNews("SomeServlet/_SomeMethod", newsDeriction, replaceNewsPosts);
-            } else if (arrowClassName == "news__arrow-r") {
-                newsDeriction = 'next';
-                sendAjaxNews("SomeServlet/_SomeMethod", newsDeriction, replaceNewsPosts);
-            } else return;
+            var pageTitleId = getIdOfPage(directlyPageTitle);
+            newsPageDirectly = 1;
 
-            function replaceNewsPosts() {
+            sendNewsParams = {
+                theme: 2,
+                page: newsPageDirectly,
+                newsPerPage: 3
+            }
+
+            getNewPosts("/News/GetPagedNews", sendNewsParams, replaceNewsPosts);
+
+            //Замена новыми постами
+            function replaceNewsPosts(result) {
                 newsContainer.css("opacity", 0);
+                isLoaded = false;
+                pageInfo = result.PageInfo;
+
                 setTimeout(function () {
-                    var parseNews = $.parseHTML(resultTempForNewsBlock);
+                    var newsArray = result.NewsViewModelList;
+                    newsArray.map(function (obj, index) {
+                        if (index > 2) return;
+                        newsContainer.append(fillBlank(obj));
+                    });
+
                     newsPosts.remove();
-                    newsContainer.append(parseNews);
                     $(".news__header").height(headerHeight);
                     newsContainer.css("opacity", 1);
+
                     isLoaded = true;
                 },300);
-                isLoaded = false;
             }
+          });
+      */
 
-            function sendAjaxNews(methodName, newsDeriction, callback) {
-                $.ajax({
-                    type: "POST",
-                    url: methodName, // Вызываемый метод на сервере
-                    // url: "SomeServlet/_SomeMethod", // Вызываемый метод на сервере
-                    contentType: "'application/x-www-form-urlencoded; charset=UTF-8",
-                    data: {newsDeriction: newsDeriction},
-                    dataType: "json",
-                    success: function (result) {
-                        console.log(newsDeriction);
-                        //  returning something
-                        console.log('result... ' + result);
+      //Когда страница прогружана, то сделать запрос на новости
 
-                    },
-                    error: function (result) {
-                        callback();
-                    }
+      // При нажатии на стрелки в блоке новостей отправка ajax за след/пред новостями
+      $(".news").on("click", getNews);
+
+      function getNews(e) {
+        if (!isLoaded) return;
+        var headerHeight = $(".news__header").css("height"),
+            newsContainer = $(".news__container"),
+            newsPosts = newsContainer.children(),
+            pageInfo,
+            sendNewsParams,
+            arrowDeriction = e.target.parentNode,
+            arrowClassName = arrowDeriction.className;
+
+        newsPageDirectly = getPageNumber(arrowClassName, newsPageDirectly);
+        console.log('newsPageDirectly ', newsPageDirectly);
+
+        sendNewsParams = {
+            theme: pageTitleId,
+            page: newsPageDirectly,
+            newsPerPage: 3
+        }
+
+        if (arrowClassName == 'news__arrow-l' || arrowClassName == 'news__arrow-r') {
+            getNewPosts( sendNewsParams, replaceNewsPosts);
+        }
+
+        //Замена новыми постами
+        function replaceNewsPosts(result) {
+            //pageInfo = result.PageInfo;
+            //Если пустой список - оставить старые. Не заменять ничего
+        //    if(result.NewsViewModelList.lenght === 0) { return; }
+
+           // localStorage.setItem('pageNumber', pageInfo.PageNumber);
+         //   console.log('replaceNewsPosts -- newsPageDirectly ', pageInfo.PageNumber);
+            newsContainer.css("opacity", 0);
+            isLoaded = false;
+            disaibleNewsArrow(arrowDeriction);
+
+            setTimeout(function () {
+                var newsArray = result;
+                newsArray.map(function (obj, index) {
+                    if (index > 2) return;
+                    newsContainer.append(fillBlank(obj));
                 });
-            }
 
-        });
+                newsPosts.remove();
+                $(".news__header").height(headerHeight);
+                newsContainer.css("opacity", 1);
 
-    })();
+                isLoaded = true;
+            },300);
+        }
+      }
+
+      //Получить предыдущие посты для моб. устройств
+      $(".news__more-news button").on('click', function (e) {
+          newsPageDirectly = 1;
+
+          var sendNewsParams = {
+              theme: pageTitleId,
+              page: newsPageDirectly,
+              newsPerPage: 3
+          }
+
+          var headerHeight = $(".news__header").css("height"),
+              newsContainer = $(".news__container"),
+              newsPosts = newsContainer.children(),
+              arrowDeriction = e.target.parentNode,
+              arrowClassName = arrowDeriction.className;
+
+          getNewPosts( sendNewsParams, replaceNewsPostsMobile)
+
+          function replaceNewsPostsMobile() {
+              var newsArray = result.NewsViewModelList;
+              newsArray.map(function (obj, index) {
+                  if (index > 2) return;
+                  newsContainer.append(fillBlank(obj));
+              });
+
+              $(".news__header").height(headerHeight);
+          }
+      });
+
+  //Функции'<img src="../resources/img/'+ obj.image +'">' +
+      function fillBlank(obj) {
+        newsItem = $(
+            '<div class="news__item">' +
+            '<div class="news__img">' +
+            '<a href="#"><img src="../resources/img/' + obj.Image + '"></a>' +
+            '</div>' +
+            '<div class="news_tag">Новости</div>' +
+            '<h4 class="news__header">' +
+            obj.Title +
+            '</h4>' +
+            '<p class="news__preview-text">' +
+            obj.Content +
+            ' </p>' +
+            '<div class="news__more-l">' +
+            '<a href="/News/Index?id=' +
+            obj.NewsId +
+            '"class="news__more">Подробнее...</a></div>' +
+            '<span class="news__data">' +
+            obj.PublishDate +
+            '</span>' +
+            '</div>'
+        );
+        return newsItem;
+      }
+
+      function getNewPosts( newsParams, callback) {
+          console.log(document.title);
+          $.ajax({
+              type: "POST",
+              url: "http://localhost:8080/getNewsForCibersite",
+              data: ({
+                   theme: getIdOfPage(document.title),
+                 // theme : '2',
+                  page: newsPageDirectly,
+                  newsPerPage: '3'
+              }),
+              dataType: "JSON",
+              success: function (result) {
+                  callback(result);
+              },
+              error: function (result) {
+                //  newsPageDirectly = localStorage.getItem('pageNumber');
+                  console.log('Fail newsPageDirectly: ',newsPageDirectly);
+                  console.log('result fail ', result);
+              }
+          });
+      }
+
+      function getIdOfPage(pageType) {
+          switch (pageType) {
+              case pageTitle.cs: return 1;
+              case pageTitle.paragon: return 2;
+              case pageTitle.dota: return 3;
+              case pageTitle.wot: return 4;
+              default:  return 5;
+          }
+      }
+
+      function getPageNumber(arrowClassName, newsPageDirectly) {
+          if (arrowClassName == "news__arrow-l") {
+              if (newsPageDirectly == 1) return newsPageDirectly;
+              return newsPageDirectly = 'priv';
+          } else if (arrowClassName == "news__arrow-r") {
+              return newsPageDirectly = 'next';
+          } else return newsPageDirectly;
+      }
+
+      function disaibleNewsArrow(arrow, pageInfo) {
+          function disaibleNewsArrow(arrow, pageInfo) {
+              if (pageInfo.PageNumber == pageInfo.TotalPages) {
+                  $(arrow).css({visibility: 'hidden'});
+              } else if (pageInfo.PageNumber == 1) {
+                  $(arrow).css({visibility: 'hidden'});
+              } else {
+                  $(latestArrow).css({visibility: 'visible'});
+              }
+              latestArrow = arrow;
+          }
+      }
+
+  })();
+
+
+
+
 
     //Кнопка бана
     var BanAction = (function () {
@@ -269,72 +422,32 @@ $(document).ready(function() {
                 error: function (result) {
                     //Тест. Потом убрать
                     //Ессли проскролили сообщения то при добалении новой не скролить вниз. Отобразить кнопку для скролинга вниз
-                    if (isBottom()) scrollDown(chatDialog);
-                    //Тест. Потом убрать
-                    appendMessage(dataMessage);
+                    // if (isBottom()) scrollDown(chatDialog);
+                    // //Тест. Потом убрать
+                    // appendMessage(dataMessage);
                     console.log('Error :(');
                 }
             });
         });
     })();
 
-
-
 //Добавление сообщения в чат. Добавление обработчиков на кнопки бана
     var appendMessage = function appendMessage(dataMessage) {
-        // var messege = $('<li class="chat__messenge"><a class="chat_ban-actions"><i aria-hidden="true" class="fa fa-ban"></i></a><div class="chat__user">' +
-        // '<div class="chat__avatar"><img src="https://support.rockstargames.com/system/photos/0001/4510/9157/profile_image_877736018_61840.png"></div>' +
-        // '<em class="chat__user-name">' + name +'</em>' +
-        // '<em class="chat__time">' + time + '</em></div>' +
-        // '<p class="chat__messenge-content">' + text + ' [' + room + '/' + counterIds + ']' + '</p></li>');
 
-        var messege = $('<li class="chat__messenge"><a class="chat_ban-actions"></a><div class="chat__user">' +
+        var messege = $('<li class="chat__messenge">' +
             '<div class="chat__avatar"><img src="https://support.rockstargames.com/system/photos/0001/4510/9157/profile_image_877736018_61840.png"></div>' +
             '<em class="chat__user-name">' + "Poollooer" +'</em>' +
             '<em class="chat__time">' + "12:25" + '</em></div>' +
             '<p class="chat__messenge-content">' + "кэшированию информации, чтобы на их платформах контент предоставлялся пользователю с оптимальной скоростью. Поэтому использование АМ"  + '</p></li>');
 
-        var chatBanButton = messege.find(".chat_ban-actions");
-        var chatSendDataButton = $('html').find(".ban-actions__act");
-        chatBanButton.off("click", BanAction.displayMenu).on("click", BanAction.displayMenu);
-        chatSendDataButton.off("click", BanAction.sendData).on("click", BanAction.sendData);
-
         $("#team-chat").append(messege);
-        // $(chatWindow).append(messege);
-
     }
 
-    // Автоматическая выравнивание блоков
-    $(function () {
-        $('.news__header').matchHeight({
-            byRow: true,
-            property: 'height',
-            target: null,
-            remove: false
-        });
-
-        $('[class*="col-"]').matchHeight({
-            byRow: true,
-            property: 'height',
-            target: null,
-            remove: false
-        });
-    });
 
 
+    $(".videos__list, .streams__list, .matches__table, .team__list, .search__list, .notification-list").mCustomScrollbar({alwaysShowScrollbar: 1});
 
-    $(".videos__list, .streams__list, .matches__table, .team__list, .search__list").mCustomScrollbar();
-
-// Удалить рекламу на веременном сервере
-    /*
-     $('body > div').filter(function(){
-     return $(this).css("height") === "65px";
-     }).remove();
-     $('body > center').remove();
-     $('body > div[style~="opacity:"]').remove();
-     */
 });
-
 
 // Чат ттугл
 (function () {
@@ -362,20 +475,493 @@ $(document).ready(function() {
         window.toggle = toggle;
 })();
 
-//Playlist for streams
+
+
+//Поиск игроков .В личном кабинете
 (function () {
-    var streams = $('.streams');
-    streams.find('.videos__name').click(function () {
-        var ref = $(this).attr('data-ref');
+    var searchButton = $("#search_button");
+    var searchInput = $("#search_input");
 
-        var videoViewerIrame = $('#stream-viewer iframe');
-        var iframe = $('<iframe frameborder="0" allowfullscreen></iframe>');
-        iframe.attr("src", ref);
-        videoViewerIrame.replaceWith(iframe);
+    searchInput.keypress(function (e) {
+        console.log(this.value);
+    })
+
+    searchButton.on('click', function (e) {
+        var requestGemer = searchInput[0].value;
+        var gamerListWrapper =  $("#mCSB_2");
+        var gamerList;
+
+        $.ajax({
+            type: "POST",
+            url: "SomeServlet/getSearchListOfGamers",
+            contentType: "'application/x-www-form-urlencoded; charset=UTF-8",
+            data: {requestGemer: requestGemer},
+            dataType: "json",
+            success: function (result) {
+                console.log('Yiiii');
+            },
+            error: function (result) {
+                gamerList = $('#mCSB_2_container');
+                gamerList.empty();
+
+                for (var i = 0; i < 20; i++) {
+                    var li = $('<li></li>').attr('class', 'search__item');
+                    var a = $('<a></a>');
+                    var img = $('<img>').attr('src', '../img/user-img.jpg');
+                    var span = $('<span>' +'NickName' + i + '</span>').attr('class', 'name');
+                    a.append(img);
+                    li.append(a);
+                    li.append(span);
+                    gamerList.append(li[0]);
+                }
+                gamerListWrapper.append(gamerList);
+            }
+        });
+    })
+})();
+
+
+
+//Управление командой. Командир
+(function() {
+  var isDeleteState = false,
+      wasClickOn,
+      containerList,
+      containerListLatest,
+      buttonDeleteGamers = $('.commands__delete-gamer'),
+      buttonChangeCommandor = $('.commands__change-commander'),
+      idGamersToServer = [];
+  var commandsAction = $('.commands__actions');
+
+  $('.commands__change-commander').on('click', function() {
+    if(isDeleteState) return;
+
+    var checkItem = $('<input type="radio" name="changeCommandor"/>'),
+        commandsControl = $('.commands__control')
+        arrayItems = $('#mCSB_1_container').children(),
+        containerList = $('#mCSB_1_container');
+        containerListLatest = containerList.clone()
+        commandsAction.css({visibility: "visible"});
+
+    wasClickOn = 'change-commander';
+    disableButtons(buttonDeleteGamers);
+
+    containerList.children().prepend(checkItem);
+    isDeleteState = true;
+  });
+
+
+  $('.commands__delete-gamer').on('click', function(e) {
+    if(isDeleteState) return;
+
+    var checkItem = $('<input type="checkbox"/>'),
+        commandsControl = $('.commands__control')
+        arrayItems = $('#mCSB_1_container').children(),
+    containerList = $('#mCSB_1_container');
+    containerListLatest = containerList.clone()
+    commandsAction.css({visibility: "visible"});
+
+    wasClickOn = 'delete-gamer';
+
+    disableButtons(buttonChangeCommandor);
+
+    containerList.children().prepend(checkItem);
+    isDeleteState = true;
+  });
+
+  $('.commands__cancel').on('click', function (e) {
+    enableButtons(buttonChangeCommandor);
+    enableButtons(buttonDeleteGamers);
+
+    containerList.replaceWith(containerListLatest);
+    commandsAction.css({visibility: "hidden"});
+    isDeleteState = false;
+  });
+
+  $('.commands__ok').on('click', function (e) {
+    var items = containerList.children();
+
+    for(var o of items) {
+      var $o = $(o);
+      if($o.children().prop("checked")) {
+        idGamersToServer.push($o.attr('data-id'));
+      }
+    }
+
+    if(idGamersToServer.length === 0) return;
+
+    switch (wasClickOn) {
+      case 'delete-gamer': sendGamersId('/deleteFromTeam', idGamersToServer);break;
+      case 'change-commander': sendGamersId('/changeCommanderForTeam', idGamersToServer);break;
+    }
+
+    idGamersToServer = [];
+
+    enableButtons(buttonChangeCommandor);
+    enableButtons(buttonDeleteGamers);
+
+    containerList.replaceWith(containerListLatest);
+    commandsAction.css({visibility: "hidden"});
+    isDeleteState = false;
+  });
+
+  $('.search__invite').on('click', function (e) {
+    var id = $(this).parent().attr('data-id');
+    sendInvite('/inviteToTeam', id, $(this));
+  });
+
+  function sendGamersId(methodName, data) {
+      $.ajax({
+          type: "GET",
+          url: methodName,
+          contentType: "'application/x-www-form-urlencoded; charset=UTF-8",
+          data: data,
+          dataType: "json",
+          success: function (result) {
+            //Прислать новый список игроков в команде и заменить им старый
+              console.log('result ', result);
+          },
+          error: function (result) {
+              console.log('result fail ', result);
+          }
+      });
+  }
+
+  function sendInvite(methodName, data, button) {
+      $.ajax({
+          type: "GET",
+          url: methodName,
+          contentType: "'application/x-www-form-urlencoded; charset=UTF-8",
+          data: data,
+          dataType: "json",
+          success: function (result) {
+            //Если выслали, то заменить эту кнопку на кнопку "Приглашение отправлено"
+              button.text('Отправлено');
+              disableButtons(button);
+          },
+          error: function (result) {
+            console.log('result fail ', this);
+          }
+      });
+  }
+
+  function enableButtons(button) {
+    button.removeAttr("style");
+    button.removeAttr("disabled");
+  }
+
+  function disableButtons(button) {
+    button.css({color: "gray"});
+    button.attr("disabled", "true");
+  }
+
+})();
+
+//Адартивный плейер
+(function() {
+  $(document).ready(function() {
+    makeAdaptivePlayer(".video-view", ".js-player-persistent-youtube");
+    makeAdaptivePlayer(".stream-view", ".js-player-persistent");
+  })
+
+  function makeAdaptivePlayer(wrapName, iframeName) {
+    var wrap = $(wrapName);
+    var iframe = $(iframeName),
+    width = wrap.width(),
+    height = width * .5625,
+    widthLetest,
+    heightLetest;
+
+    iframe.attr('width',width);
+    iframe.attr('height', height);
+    wrap.css('height', height);
+
+    $( window ).resize(function() {
+
+      width = wrap.width();
+      if(typeof width !== 'undefined') {
+        height = width * .5625;
+
+        iframe.attr('width',width);
+        wrap.css('height', height);
+        iframe.attr('height', height);
+
+        widthLetest = width;
+        heightLetest = height;
+      } else {
+        iframe.attr('width',widthLetest);
+        wrap.css('height', heightLetest);
+        iframe.attr('height', heightLetest);
+      }
     });
-}());
+  }
+})();
 
 
+
+var notifArray = [
+    {
+        Id:3,
+        IsChecked: false,
+        NotificationTime:"2017-05-10T21:34:37",
+        Title:"Lapstock Хотчет добавить вас в команду"
+    },
+    {
+        Id:3450,
+        IsChecked:true,
+        hasAnswer: 1,
+        NotificationTime:"2017-05-10T21:34:37",
+        Title:"Через 30 минут выхоид лялял"
+    },
+    {
+        Id:30,
+        IsChecked:false,
+        hasAnswer: 0,
+        NotificationTime:"2017-05-10T21:34:37",
+        Title:"First notification"
+    },
+    {
+        Id:98,
+        IsChecked:false,
+        NotificationTime:"2017-05-10 T21:34:37",
+        Title:" notification"
+    },
+    {
+        Id:3450,
+        IsChecked:true,
+        hasAnswer: 1,
+        NotificationTime:"2017-05-10T21:34:37",
+        Title:"Через 30 минут выхоид лялял"
+    },
+    {
+        Id:3450,
+        IsChecked:true,
+        NotificationTime:"2017-05-10T21:34:37",
+        Title:"Через 30 минут выхоид лялял"
+    },
+    {
+        Id:3450,
+        IsChecked:false,
+        NotificationTime:"2017-05-10T21:34:37",
+        Title:"Через 30 минут выхоид лялял"
+    },
+    {
+        Id:3450,
+        IsChecked:true,
+        NotificationTime:"2017-05-10T21:34:37",
+        Title:"Через 30 минут выхоид лялял"
+    },
+    {
+        Id:350,
+        IsChecked:true,
+        NotificationTime:"2017-05-10T21:34:37",
+        Title:"2 notification"
+    }
+];
+
+//Уведомленяия polliyng ajax
+(function() {
+    var notification = $('.personal-data__has-notifiction')
+        timer = 8000;
+
+    if (notification.length !== 0) {
+        (function () {
+            var notificationList,
+                notificationActions;
+
+
+             $('.personal-data__button--notifiction').on('click', function (e) {
+                 $('#NotificationModal').modal('toggle');
+
+                 getSetNotifications('/api/Notification/SetCheckedByList', onFulfilledSetCheckedNotifications, onRejectedSetCheckedNotifications);
+                 getSetNotifications('/api/Notification/GetUserNotifications', onFulfilledGetNotifications, onRejectedGetNotifications);
+             });
+
+            $('.notification-list').on('click', '.notification__invite--ok ', function () {
+                var id = $(this).closest('.notification__item').attr('data-id');
+                notificationActions = $(this).closest('.notification__actions');
+                sendAjaxNotification('/api/Notification/SetChecked', { idNotification: id, state: 1 }, feedbackAgree);
+            });
+
+            $('.notification-list').on('click', '.notification__invite--cancel ', function () {
+                var id = $(this).closest('.notification__item').attr('data-id');
+                notificationActions = $(this).closest('.notification__actions');
+                sendAjaxNotification('/api/Notification/SetChecked', { idNotification: id, state: 0 }, feedbackCancel);
+            });
+
+            $('.notification-list').on('mouseenter','.notification__item', function () {
+                // $(this).find('.notification__new-notifiction').removeClass('isVisible');
+                // getSetNotifications('/api/Notification/SetCheckedByList', onFulfilledSetCheckedNotifications, onRejectedSetCheckedNotifications);
+            });
+
+            setInterval(function() {
+                if( $('#NotificationModal').css('display') === 'block') {
+                    getSetNotifications('/api/Notification/SetCheckedByList', onFulfilledSetCheckedNotifications, onRejectedSetCheckedNotifications);
+                }
+                getSetNotifications('/api/Notification/GetUserNotifications', onFulfilledGetNotifications, onRejectedGetNotifications);
+            }, timer);
+
+            //Замен кнопок действия на ничего
+            function feedbackAgree() {
+                notificationActions.replaceWith( $('<span class="notification__feedback--ok">Заявка принята</span>'));
+            }
+
+            function feedbackCancel() {
+                notificationActions.replaceWith( $('<span class="notification__feedback--cancel">Отклонено</span>'));
+            }
+
+            //Проверка есть ли непросмотренные уведомления
+            function checkUncheckedNotifications() {
+                return notifArray.some(function (item) {
+                    return (item.IsChecked);
+                });
+            }
+
+            //Отобразить элемент
+            function makeVisible(el) {
+                el.addClass('isVisible');
+            }
+
+            //получаем массив с html
+            function parseNotificationToList() {
+                var notifictionsList = [];
+                notifArray.forEach( function (item) {
+                    notifictionsList.push(fillBlank(item))
+                });
+                return notifictionsList;
+            }
+
+            //Замена старого списка уведомлений на новый
+            function replaceNotifictionList(newNotifictionsList) {
+                notificationList = $('#mCSB_3_container');
+                notificationList.children().remove();
+                notificationList.append(newNotifictionsList);
+            }
+
+            //парсим json в html разметку
+            function fillBlank(item) {
+                var isChecked,
+                    hasAnswer = ' <div class="notification__actions">' +
+                        ' <a href="#" class="notification__button notification__invite--ok">Принять</a>' +
+                        ' <a href="#" class="notification__button notification__invite--cancel">Отклонить</a>' +
+                        ' </div>';
+
+                if (item.IsChecked) {
+                    isChecked = '';
+                } else {
+                    isChecked = 'isVisible';
+                }
+
+                //Если уже отвечали на это уведомление
+                if (item.hasOwnProperty('hasAnswer')) {
+                    switch (item.hasAnswer) {
+                        case 0:
+                            hasAnswer = '<span class="notification__feedback--cancel">Отклонено</span>';
+                            break;
+                        case 1:
+                            hasAnswer = '<span class="notification__feedback--ok">Заявка принята</span>';
+                            break;
+                        default:  hasAnswer = ' <div class="notification__actions">' +
+                            ' <a href="#" class="notification__button notification__invite--ok">Принять</a>' +
+                            ' <a href="#" class="notification__button notification__invite--cancel">Отклонить</a>' +
+                            ' </div>';
+                    }
+                }
+
+                    return $('<li data-id=' +
+                        item.Id +
+                        ' class="notification__item">' +
+                        '<div class="notification__new-notifiction ' + isChecked + ' "></div>' +
+                        '<span class="notification__title">' +
+                        item.Title +
+                        '</span>' +
+                        '<span class="notification__time">' +
+                        item.NotificationTime +
+                        '</span>' +
+                        hasAnswer +
+                        '</li>');
+                }
+
+
+
+            //Получить список уведомлений при успешном запросе
+            function onFulfilledGetNotifications(data) {
+                if (checkUncheckedNotifications(data)) {
+                    makeVisible(notification);
+                }
+                replaceNotifictionList(parseNotificationToList());
+            }
+            //Ошибка запроса при неудачном запросе
+            function onRejectedGetNotifications () {
+                console.log('Error!');
+                // $('.notification span').append( $('<span class="notification__error">Ошибка</span>'));
+                if (checkUncheckedNotifications()) {
+                    makeVisible(notification);
+                }
+                replaceNotifictionList(parseNotificationToList());
+            }
+
+
+            //оправка отмеченных уведомлений как прочинатны
+            function onFulfilledSetCheckedNotifications(data) {
+                $('.notification__new-notifiction').removeClass('isVisible');
+                console.log("Checked");
+            }
+            function onRejectedSetCheckedNotifications() {
+                console.log('Error!', 'Checked');
+            }
+
+
+            function getSetNotifications(url, resolve, reject) {
+                $.ajax({
+                    url: url,
+                    dataType: 'json',
+                    type: 'get',
+                    success: function(data) {
+                        resolve(data);
+                    },
+                    error: function() {
+                        reject();
+                    }
+                });
+            };
+
+            function sendAjaxNotification(url, data, callback) {
+                $.ajax({
+                    url: url,
+                    type: 'get',
+                    data: data,
+                    dataType: "json",
+                    success: function(data) {
+                        callback();
+                    },
+                    error: function() {
+                        console.log('Error!');
+                        callback();
+                    }
+                });
+            };
+        })();
+    }
+})();
+
+
+// Автоматическая выравнивание блоков
+$(function () {
+    $('.news__header').matchHeight({
+        byRow: true,
+        property: 'height',
+        target: null,
+        remove: false
+    });
+
+    $('[class*="col-"]').matchHeight({
+        byRow: true,
+        property: 'height',
+        target: null,
+        remove: false
+    });
+});
 
 /*!
  * Bootstrap v4.0.0-alpha.4 (http://getbootstrap.com)

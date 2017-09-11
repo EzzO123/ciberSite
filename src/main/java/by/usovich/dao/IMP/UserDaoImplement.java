@@ -2,6 +2,7 @@ package by.usovich.dao.IMP;
 
 import by.usovich.dao.UserDaoInterface;
 import by.usovich.entity.UserEntity;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -20,6 +21,8 @@ public class UserDaoImplement implements UserDaoInterface {
 
     @Resource(name = "sessionFactory")
     public SessionFactory sessionFactory;
+
+    public Logger log = Logger.getLogger(UserDaoImplement.class);
 
     public boolean isLoginExists(String login){
 
@@ -82,18 +85,46 @@ public class UserDaoImplement implements UserDaoInterface {
     }
 
     @Override
-    public void createUser(UserEntity profile) {
+    public void createUser(UserEntity userEntity) {
+
+        sessionFactory.getCurrentSession().save(userEntity);
+        log.info("UserEntiry add in BD ");
+
+    }
+
+
+    @Override
+    //fail
+    public void deleteUser(UserEntity userEntity) {
+
+
+        sessionFactory.getCurrentSession().delete(userEntity);
+        log.info("UserEntiry delete from BD ");
 
     }
 
     @Override
-    public void deleteUser(UserEntity profile) {
+    public void updateUser(UserEntity userEntity) {
 
     }
 
 
-    public List getUserEntityByLogin() {
-        return null;
+    public List getUserEntityByLogin(String login) {
+
+        String HQL = "FROM UserEntity WHERE user_nick=:login";
+        String paramInHQL ="login";
+
+        List postEntity = null;
+        try {
+            postEntity = getListAtHQL(HQL,login,paramInHQL,sessionFactory);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(postEntity == null){
+            return null;
+        }
+        return postEntity;
     }
 
     private List getListAtHQL(String HQL, String required, String paramInHQL, SessionFactory sessionFactory) throws Exception{//Топовое блбла но как назвать не знаю//ToDo

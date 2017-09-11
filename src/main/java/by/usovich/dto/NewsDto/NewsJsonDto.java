@@ -31,12 +31,12 @@ public class NewsJsonDto {
 
     public void putPost(NewsDto post){
 
-        putPostInMap(post);
+        putNewsInMap(post);
         putPostInJson(post);
 
     }
 
-    public void putPostInMap (NewsDto post){
+    public void putNewsInMap(NewsDto post){
 
 
         map.put(counter + "",post);
@@ -48,10 +48,11 @@ public class NewsJsonDto {
            // jsonObject.put("Id", counter + "");
             JSONObject jsonObject = new JSONObject();
 
-            jsonObject.put("titel",post.get_titel());
-            jsonObject.put("content",post.get_content());
-            jsonObject.put("date",post.get_date());
-            jsonObject.put("image",post.get_image());
+            jsonObject.put("Title",post.get_titel());
+            jsonObject.put("Content",post.get_content());
+            jsonObject.put("NewsId",post.get_newsId());
+            jsonObject.put("PublishDate",post.get_date());
+            jsonObject.put("Image",post.get_image());
 
             jsonArray.put(jsonObject);
 

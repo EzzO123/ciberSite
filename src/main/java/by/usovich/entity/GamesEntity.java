@@ -19,8 +19,7 @@ public class GamesEntity implements Serializable  {
 
 
     //ToDo Error in BD
-      @OneToOne
-      @JoinColumn(name = "fk_user_id")
+      @OneToOne(mappedBy = "games")
       private UserEntity userEntity;
 
     public UserEntity getUserEntity() {
@@ -28,16 +27,13 @@ public class GamesEntity implements Serializable  {
     }
 
     public void setUserEntity(UserEntity userEntity) {
-
-        userEntity.set_games(this);
-
         this.userEntity = userEntity;
     }
 
     @Id
-    @Column(name = "games_id", nullable = false, insertable = true, updatable = true)
+    @Column(name = "games_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int _id;
+    private int _id;
 
     @Column(name = "games_numberVisitDota")
     private int numberVisitDota;
@@ -49,7 +45,7 @@ public class GamesEntity implements Serializable  {
     private int numberVisitCs;
 
     @Column(name = "games_numberVisitWOT")
-    private int numberVisitWOT;
+    private int numberVisitWOT ;
 
 
 
