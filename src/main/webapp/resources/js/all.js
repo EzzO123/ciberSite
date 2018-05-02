@@ -73,6 +73,7 @@ $(document).ready(function() {
       $(".news").on("click", getNews);
 
       function getNews(e) {
+
         if (!isLoaded) return;
         var headerHeight = $(".news__header").css("height"),
             newsContainer = $(".news__container"),
@@ -81,6 +82,7 @@ $(document).ready(function() {
             sendNewsParams,
             arrowDeriction = e.target.parentNode,
             arrowClassName = arrowDeriction.className;
+
 
         newsPageDirectly = getPageNumber(arrowClassName, newsPageDirectly);
         console.log('newsPageDirectly ', newsPageDirectly);
@@ -157,7 +159,7 @@ $(document).ready(function() {
         newsItem = $(
             '<div class="news__item">' +
             '<div class="news__img">' +
-            '<a href="#"><img src="../resources/img/' + obj.Image + '"></a>' +
+            '<a href="#"><img src="' +obj.Image +'"></a>' +
             '</div>' +
             '<div class="news_tag">Новости</div>' +
             '<h4 class="news__header">' +
@@ -179,6 +181,7 @@ $(document).ready(function() {
       }
 
       function getNewPosts( newsParams, callback) {
+          alert("GetNews");
           console.log(document.title);
           $.ajax({
               type: "POST",

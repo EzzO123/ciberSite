@@ -14,13 +14,10 @@
     <context:component-scan base-package="by.usovich.service"> </context:component-scan>
     <context:component-scan base-package="by.usovich.dao"> </context:component-scan>
 
-
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-
-
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -48,8 +45,7 @@
 
 
 
-
-    <!-- Фабрика, которая будет строить Hibernate-сессии -->
+ <!-- Фабрика, которая будет строить Hibernate-сессии -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 
     <property name="dataSource" ref="dataSource"/>

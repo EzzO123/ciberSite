@@ -1,6 +1,7 @@
 package by.usovich.service.Imp;
 
 import by.usovich.dao.NewsDaoInterface;
+import by.usovich.dto.NewsDto.CreateNewsDto;
 import by.usovich.dto.NewsDto.NewsDto;
 import by.usovich.dto.NewsDto.NewsJsonDto;
 import by.usovich.entity.NewsEntity;
@@ -22,6 +23,28 @@ import java.util.LinkedList;
 @Service("newsService")
 public class NewsServiceImplement implements NewsServiceInterface {
 
+    @Autowired
+    NewsDaoInterface newsDaoImp;
+
+    public boolean setVideoOrStream(CreateNewsDto createNewsDto) {
+
+        if(!(createNewsDto.getContent().equals(null) && createNewsDto.getRefImage().equals(null)
+                && createNewsDto.getTitel().equals(null))){
+
+                NewsEntity newsEntity = new NewsEntity();
+
+            newsEntity.set_titel(getNameTablePost(createNewsDto.getTitel()));
+            newsEntity.set_content(createNewsDto.getContent());
+            newsEntity.set_image(createNewsDto.getRefImage());
+            newsEntity.set_date("---------");
+
+            newsDaoImp.createNews(newsEntity);
+
+                return true;
+        }
+
+        return false;
+    }
 
     @Autowired
     public NewsDaoInterface PostDaoImp;

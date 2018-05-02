@@ -1,7 +1,7 @@
 package by.usovich.service;
 
 
-import by.usovich.dto.StreamDto.StreamJsonDto;
+import by.usovich.dto.StreamAndVideoDto.StreamDto.StreamJsonDto;
 
 /**
  * Created by yanus on 8/19/2017.

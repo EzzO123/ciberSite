@@ -32,21 +32,14 @@ public class NewsController {
 
     private static final Logger log = Logger.getLogger(NewsController.class);
 
-    @RequestMapping(value = "/index",method = RequestMethod.POST)
-    public String getNewPageWithNews(@RequestParam String titel,@RequestParam String number, HttpSession session, Model model){
-
-
-        model.addAttribute("posts",postServiceImp.getNewsAtNameGame(titel,number).getMap());
-
-        return "index";
-    }
-
-    @RequestMapping(value = "/index",method = RequestMethod.GET)
-    public String getNewPage( HttpSession session, Model model){
-
-
-        return "index";
-    }
+//    @RequestMapping(value = "/index",method = RequestMethod.POST)
+//    public String getNewPageWithNews(@RequestParam String titel, @RequestParam String number, HttpSession session, Model model){
+//
+//
+//        model.addAttribute("posts",postServiceImp.getNewsAtNameGame(titel,number).getMap());
+//
+//        return "index";
+//    }
 
 
     @RequestMapping(value = "/getNews",method = RequestMethod.GET)
@@ -102,8 +95,9 @@ public class NewsController {
 
         //ToDo
 
-
+        System.out.println("NewsController : getNewsForCiberSite");
         String string = postServiceImp.getNewsAtNameGame(theme,newsDeriction,newsPerPage,session).getJsonArray().toString();//for debbug
+
 
 
 

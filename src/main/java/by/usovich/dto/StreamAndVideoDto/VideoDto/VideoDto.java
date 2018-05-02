@@ -1,41 +1,26 @@
-package by.usovich.entity;
-
-import javax.persistence.*;
-import java.io.Serializable;
+package by.usovich.dto.StreamAndVideoDto.VideoDto;
 
 /**
  * Created by yanus on 8/19/2017.
  */
-@Entity
-@Table(name = "video")
-public class VideoEntity implements Serializable {
+public class VideoDto {
 
-    @Id
-    @Column(name = "video_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int _id;
-
-    @Column(name = "video_titel")
     private String _titel;
 
-    @Column(name = "video_name")
     private String _name;
 
-    @Column(name = "video_refVideo")
     private String _refVideo;
 
-    @Column(name = "video_refImage")
     private String _refImage;
 
-    @Column(name = "video_data")
     private String _data;
 
-    public int get_id() {
-        return _id;
-    }
-
-    public void set_id(int _id) {
-        this._id = _id;
+    public VideoDto(String titel, String name, String refVideo, String refImage, String data) {
+        this._titel = titel;
+        this._name = name;
+        this._refVideo = refVideo;
+        this._refImage = refImage;
+        this._data = data;
     }
 
     public String get_titel() {
@@ -78,4 +63,3 @@ public class VideoEntity implements Serializable {
         this._data = _data;
     }
 }
-

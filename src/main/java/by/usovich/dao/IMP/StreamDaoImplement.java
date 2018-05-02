@@ -1,6 +1,9 @@
 package by.usovich.dao.IMP;
 
 import by.usovich.dao.StreamsDaoInterface;
+import by.usovich.entity.StreamEntity;
+import by.usovich.entity.UserEntity;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -15,6 +18,8 @@ import java.util.List;
 @Repository("streamDaoImp")
 @Transactional
 public class StreamDaoImplement implements StreamsDaoInterface {
+
+    public Logger log = Logger.getLogger(StreamDaoImplement.class);
 
     @Resource(name = "sessionFactory")
     public SessionFactory sessionFactory;
@@ -42,4 +47,21 @@ public class StreamDaoImplement implements StreamsDaoInterface {
         }
         return postEntity;
     }
+
+    @Override
+    public void createStream(StreamEntity streamEntity) {
+
+        sessionFactory.getCurrentSession().save(streamEntity);
+        log.info("Stream entity add in BD ");
+
+
+    }
+
+    public void deleteStream(StreamEntity streamEntity) {
+
+        sessionFactory.getCurrentSession().delete(streamEntity);
+        log.info("UserEntiry delete from BD ");
+    }
+
+
 }

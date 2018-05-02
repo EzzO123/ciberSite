@@ -2,6 +2,8 @@ package by.usovich.dao.IMP;
 
 import by.usovich.dao.NewsDaoInterface;
 
+import by.usovich.entity.NewsEntity;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -14,8 +16,10 @@ import java.util.*;
  * Created by yanus on 15.05.2017.
  */
 @Repository("newsDaoImp")
-@Transactional
+@Transactional (noRollbackFor = Exception.class)
 public class NewsDaoImplement implements NewsDaoInterface {
+
+    public Logger log = Logger.getLogger(NewsDaoImplement.class);
 
     @Resource(name = "sessionFactory")
     public SessionFactory sessionFactory;
@@ -42,6 +46,22 @@ public class NewsDaoImplement implements NewsDaoInterface {
             System.out.println("Exception : " + e);
         }
         return postEntity;
+    }
+
+    @Override
+    public void createNews(NewsEntity newsEntity) {
+
+        sessionFactory.getCurrentSession().save(newsEntity);
+        log.info("News entity add in BD ");
+
+
+    }
+
+    @Override
+    public void deleteNews(NewsEntity newsEntity) {
+
+        sessionFactory.getCurrentSession().delete(newsEntity);
+        log.info("News delete from BD ");
     }
 
 

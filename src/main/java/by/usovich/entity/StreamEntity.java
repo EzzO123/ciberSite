@@ -27,7 +27,7 @@ public class StreamEntity implements Serializable{
     @Column(name = "streams_refImage")
     private String _refImage;
 
-    @Column(name = "streams_date")
+    @Column(name = "streams_data")
     private String _data;
 
     public int get_id() {

@@ -220,15 +220,9 @@
                     <li class="nav-games__item nav-item active" ><a  class="nav-games__link nav-link" href="../main-page-dota"><span>Dota 2</span></a></li>
                 </ul>
                 <div class="account-option"><span class="login login__icon"><a href="../login">Вход</a>
-                <div class="account-option__actions-list">
-                  <ul class="account-option__list">
-                    <li class="account-option__item"><a class="account-option__link">Написать новость</a></li>
-                    <li class="account-option__item"><a class="account-option__link">Добавить стрим</a></li>
-                    <li class="account-option__item"><a class="account-option__link">Action</a></li>
-                    <li class="account-option__item"><a class="account-option__link">Action</a></li>
-                  </ul>
-                </div></span><span>/</span><span class="registration"><a href="../reg">Регистрация</a></span></div>
+                </span><span>/</span><span class="registration"><a href="../reg">Регистрация</a></span></div>
             </div>
+
         </nav>
 
 

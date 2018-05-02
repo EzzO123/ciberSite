@@ -1,5 +1,8 @@
 package by.usovich.dao;
 
+import by.usovich.entity.StreamEntity;
+import by.usovich.entity.UserEntity;
+
 import java.util.List;
 
 /**
@@ -8,4 +11,8 @@ import java.util.List;
 public interface StreamsDaoInterface {
 
     public List getStreamAtTitel(String nameGameTable);
+
+    void createStream(StreamEntity streamEntity);
+
+    public void deleteStream(StreamEntity streamEntity);
 }

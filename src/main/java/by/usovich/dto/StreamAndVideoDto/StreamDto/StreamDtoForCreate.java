@@ -1,9 +1,9 @@
-package by.usovich.dto.VideoDto;
+package by.usovich.dto.StreamAndVideoDto.StreamDto;
 
 /**
- * Created by yanus on 8/19/2017.
+ * Created by yanus on 9/24/2017.
  */
-public class VideoDto {
+public class StreamDtoForCreate {
 
     private String _titel;
 
@@ -15,7 +15,7 @@ public class VideoDto {
 
     private String _data;
 
-    public VideoDto(String titel, String name, String refVideo, String refImage, String data) {
+    public StreamDtoForCreate(String titel, String name, String refVideo, String refImage, String data) {
         this._titel = titel;
         this._name = name;
         this._refVideo = refVideo;

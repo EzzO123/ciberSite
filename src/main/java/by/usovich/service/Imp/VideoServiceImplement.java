@@ -3,10 +3,8 @@ package by.usovich.service.Imp;
 
 import by.usovich.dao.VideoDaoInterface;
 
-import by.usovich.dto.NewsDto.NewsJsonDto;
-import by.usovich.dto.VideoDto.VideoDto;
-import by.usovich.dto.VideoDto.VideoJsonDto;
-import by.usovich.entity.NewsEntity;
+import by.usovich.dto.StreamAndVideoDto.VideoDto.VideoDto;
+import by.usovich.dto.StreamAndVideoDto.VideoDto.VideoJsonDto;
 import by.usovich.entity.VideoEntity;
 import by.usovich.service.VideoServiceInterface;
 import org.apache.log4j.Logger;
@@ -26,7 +24,7 @@ public class VideoServiceImplement implements VideoServiceInterface {
 
     private static final Logger log = Logger.getLogger(StreamServiceImplement.class);
 
-    public VideoJsonDto getVideoAtNameGame(String nameTheme, String numberOfPosts) {//получение множества последних постов
+    public VideoJsonDto getVideoAtNameGame(int countView,String nameTheme, String numberOfPosts) {//получение множества последних постов
 
         int numberPosts = Integer.parseInt(numberOfPosts);
 
@@ -53,7 +51,7 @@ public class VideoServiceImplement implements VideoServiceInterface {
 
                 log.info("Сущность получена");
 
-                getLastVideo(0,videoEntity,videoJsonDto);
+                getLastVideo(countView,videoEntity,videoJsonDto);
 
             }
         }
@@ -61,14 +59,14 @@ public class VideoServiceImplement implements VideoServiceInterface {
         return videoJsonDto;//DAO
     }
 
-    private void getLastVideo(int displayedNews, List newsEntity, VideoJsonDto newsJsonDto) {//получение последних постов добавленных в БД
+    private void getLastVideo(int countView, List videoEntity, VideoJsonDto videoJsonDto) {//получение последних постов добавленных в БД
 
-        for (int temp = displayedNews; displayedNews + 3 > temp; temp++) {//получение последних постов добавленных в БД
+        for (int temp = 0; countView > temp; temp++) {//получение последних постов добавленных в БД
 
-            int sizeList = newsEntity.size();
+            int sizeList = videoEntity.size();
 
-            newsJsonDto.putVideo(getPostEntityInPostDto((VideoEntity)
-                    newsEntity.get(sizeList - temp - 1)));//Получение из списка ENITITYpost в DTOpost
+            videoJsonDto.putVideo(getPostEntityInPostDto((VideoEntity)
+                    videoEntity.get(sizeList - temp - 1)));//Получение из списка ENITITYpost в DTOpost
 
         }
     }

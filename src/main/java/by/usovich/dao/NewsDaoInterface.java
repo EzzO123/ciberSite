@@ -1,5 +1,7 @@
 package by.usovich.dao;
 
+import by.usovich.entity.NewsEntity;
+
 import java.util.*;
 
 /**
@@ -8,5 +10,9 @@ import java.util.*;
 public interface NewsDaoInterface {
 
     public List getNewsAtTitel(String nameGameTable);
+
+    void createNews(NewsEntity newsEntity);
+
+    public void deleteNews(NewsEntity newsEntity);
 
 }

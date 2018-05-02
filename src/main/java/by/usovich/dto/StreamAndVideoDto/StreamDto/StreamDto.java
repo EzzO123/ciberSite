@@ -1,4 +1,4 @@
-package by.usovich.dto.StreamDto;
+package by.usovich.dto.StreamAndVideoDto.StreamDto;
 
 /**
  * Created by yanus on 8/19/2017.

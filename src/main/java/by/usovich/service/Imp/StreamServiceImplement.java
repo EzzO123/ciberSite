@@ -1,10 +1,8 @@
 package by.usovich.service.Imp;
 
 import by.usovich.dao.StreamsDaoInterface;
-import by.usovich.dto.NewsDto.NewsJsonDto;
-import by.usovich.dto.StreamDto.StreamDto;
-import by.usovich.dto.StreamDto.StreamJsonDto;
-import by.usovich.entity.NewsEntity;
+import by.usovich.dto.StreamAndVideoDto.StreamDto.StreamDto;
+import by.usovich.dto.StreamAndVideoDto.StreamDto.StreamJsonDto;
 import by.usovich.entity.StreamEntity;
 import by.usovich.service.StreamServiceInterface;
 import org.apache.log4j.Logger;

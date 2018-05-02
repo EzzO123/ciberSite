@@ -1,4 +1,5 @@
-package by.usovich.dto.StreamDto;
+package by.usovich.dto.StreamAndVideoDto.VideoDto;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,9 +11,9 @@ import java.util.Map;
 /**
  * Created by yanus on 8/21/2017.
  */
-public class StreamJsonDto {
+public class VideoJsonDto {
 
-    public StreamJsonDto() {
+    public VideoJsonDto() {
     }
 
 
@@ -32,14 +33,14 @@ public class StreamJsonDto {
         return jsonArray;
     }
 
-    public void putStream(StreamDto news){
+    public void putVideo(VideoDto videoDto){
 
-        putPostInMap(news);
-    //    putPostInJson(news);
+        putPostInMap(videoDto);
+      //  putPostInJson(videoDto);
 
     }
 
-    public void putPostInMap (StreamDto post){
+    public void putPostInMap (VideoDto post){
 
         try {
             Map<String, String> map = new LinkedHashMap<String, String>();
@@ -60,7 +61,7 @@ public class StreamJsonDto {
         counter++;
     }
 
-    public void putPostInJson (StreamDto post){
+    public void putPostInJson (VideoDto post){
         try {
             // jsonObject.put("Id", counter + "");
             JSONObject jsonObject = new JSONObject();
@@ -81,6 +82,5 @@ public class StreamJsonDto {
         //  map.put(counter + "",post);
         counter++;
     }
-
 
 }

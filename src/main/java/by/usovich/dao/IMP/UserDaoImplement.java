@@ -97,10 +97,8 @@ public class UserDaoImplement implements UserDaoInterface {
     //fail
     public void deleteUser(UserEntity userEntity) {
 
-
         sessionFactory.getCurrentSession().delete(userEntity);
         log.info("UserEntiry delete from BD ");
-
     }
 
     @Override
