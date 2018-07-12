@@ -13,20 +13,6 @@ import java.io.Serializable;
 @Table(name = "user")
 public class UserEntity implements Serializable {
 
-
-
-    //ToDo Error in BD
-    @OneToOne(cascade = CascadeType.ALL) // устанавливаем связь с классом/таблицец UserEntity
-    @JoinColumn(name="fk_games_id")
-    private GamesEntity games;
-    //    @OneToOne
-
-    @OneToOne(mappedBy = "user")
-    private MessageEntity messageEntity;
-
-
-
-
     public UserEntity( ) {
     }
 
@@ -38,27 +24,17 @@ public class UserEntity implements Serializable {
     @Column(name = "user_nick")
     private String _login;
 
+    @Column(name = "user_name")
+    private String _name;
+
     @Column(name = "user_email")
     private String _email;
 
     @Column(name = "user_password")
     private String _password;
 
-
-    @Column(name = "user_country")
-    private String _country;
-
-    @Column(name = "fk_games_id",insertable = false,updatable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int fk_games_id;
-
-    public int getFk_games_id() {
-        return fk_games_id;
-    }
-
-    public void setFk_games_id(int fk_games_id) {
-        this.fk_games_id = fk_games_id;
-    }
+    @Column(name = "user_role")
+    private String _role;
 
     // @OneToOne(cascade = CascadeType.ALL,targetEntity = GamesEntity.class)
 
@@ -102,20 +78,19 @@ public class UserEntity implements Serializable {
         this._password = _password;
     }
 
-    public String get_country() {
-        return _country;
+    public String get_name() {
+        return _name;
     }
 
-    public void set_country(String _country) {
-        this._country = _country;
+    public void set_name(String _name) {
+        this._name = _name;
     }
 
-
-    public GamesEntity get_games() {
-        return games;
+    public String get_role() {
+        return _role;
     }
 
-    public void set_games(GamesEntity games) {
-        this.games = games;
+    public void set_role(String _role) {
+        this._role = _role;
     }
 }

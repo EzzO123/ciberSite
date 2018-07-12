@@ -21,12 +21,11 @@
     </bean>
 
 
-
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/cibersite" />
-        <property name="username" value="root" />
-        <property name="password" value="root" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/billboard"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="TpUr9090"></property>
     </bean>
 
     <!--<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">-->
@@ -56,9 +55,11 @@
     <property name="packagesToScan" value="by.usovich"/>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
             </props>
         </property>
+
+
 
     </bean>
 
@@ -72,9 +73,7 @@
 
 
 
-    <!--<bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
-        <!--<property name="dataSource" ref="dataSource" />-->
-    <!--</bean>-->
+
 
 
 </beans>

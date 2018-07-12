@@ -39,7 +39,7 @@ public class RegistController {
 
         log.info("\n" + "Login : " + regDto.getLogin() + "\n" + "Email : " + regDto.getEmail() +
                 "\n" + "Password : " + regDto.getPassword() + "\n" + "Repassword : " + regDto.getRepassword() +
-                "\n" + "Country : " + regDto.getCountry() + "\n" + "Games : " + regDto.toStringForGames());
+                "\n" );
 
         userServiseImp.isLoginExists(regDto.getLogin());
 

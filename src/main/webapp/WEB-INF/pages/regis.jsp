@@ -231,7 +231,7 @@
         </nav>
         <div class="registration-block">
             <h2>Регистрация</h2>
-            <form id="registration-form" class="registration-form"  action="reg" method="post">
+            <form id="registration-form" class="registration-form"  action="reg" method="get">
                 <fieldset>
                     <input type="text" size="40" name="login" placeholder="Логин">
                     <input type="email" size="40" name="email" placeholder="Email">

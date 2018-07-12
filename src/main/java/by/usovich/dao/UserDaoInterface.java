@@ -3,7 +3,6 @@ package by.usovich.dao;
 /**
  * Created by yanus on 7/14/2017.
  */
-import by.usovich.entity.GamesEntity;
 import by.usovich.entity.UserEntity;
 
 import java.util.*;

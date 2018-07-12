@@ -25,41 +25,6 @@ public class LoginController {
     @Autowired
     public UserServiseInterface userServiseImp;
 
-
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String getPageLogin(HttpSession session, @ModelAttribute("userDto") LoginDto userDto){
-
-        LoginDto userDtoTipoFromBD = new LoginDto("SoLo@gmail.com","SoLo","www");
-
-
-       // validator.validate(UserDto,result);
-
-        if(false){
-            return "login";
-        }else{
-
-            if(true) {//Поиск user from BD ПО логину
-
-                if(true) {//Проверка на пароль
-
-                }
-                else{
-                    //ToDo
-                    //Неверный пароль
-                }
-            }
-            else{
-                //ToDo
-                //Неверный логин
-            }
-        }
-
-
-
-        return "login";
-    }
-
-
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String Login(@ModelAttribute("userDto") LoginDto userDto, HttpSession session){
 

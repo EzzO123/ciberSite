@@ -11,26 +11,20 @@ public class RegDto {
     private String email;
     private String password;
     private String repassword;
-    private String country;
-
-    private Map games =  new HashMap<String,String>();
+    private String name;
+    private boolean role;
 
 
     public RegDto(){
 
-        games.put("dota",0 + "");
-        games.put("cs",0 + "");
-        games.put("paragon",0 + "");
-        games.put("wot",0 + "");
-
     }
 
-    public RegDto(String nick, String email, String password, String repassword, String country) {
+    public RegDto(String nick, String email, String password, String repassword, String name) {
         this.login = nick;
         this.email = email;
         this.password = password;
         this.repassword = repassword;
-        this.country = country;
+        this.name = name;
 
 
     }
@@ -67,21 +61,19 @@ public class RegDto {
         this.repassword = repassword;
     }
 
-    public String getGame(String key) {
-        return games.get(key).toString();
+    public String getName() {
+        return name;
     }
 
-
-
-    public String getCountry() {return country;}
-
-    public void setCountry(String country) {this.country = country;}
-
-    public String toStringForGames(){
-
-        return games.toString();
-
+    public void setName(String name) {
+        this.name = name;
     }
 
+    public boolean isRole() {
+        return role;
+    }
 
+    public void setRole(boolean role) {
+        this.role = role;
+    }
 }

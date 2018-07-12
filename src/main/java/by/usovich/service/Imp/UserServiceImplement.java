@@ -3,7 +3,6 @@ package by.usovich.service.Imp;
 import by.usovich.dao.UserDaoInterface;
 import by.usovich.dto.LoginAndRegDto.RegDto;
 import by.usovich.dto.UserDto;
-import by.usovich.entity.GamesEntity;
 import by.usovich.entity.UserEntity;
 import by.usovich.service.UserServiseInterface;
 import org.apache.log4j.Logger;
@@ -89,18 +88,9 @@ public class UserServiceImplement implements UserServiseInterface {
         userEntity.set_login(regDto.getLogin());
         userEntity.set_password(regDto.getPassword());
         userEntity.set_email(regDto.getEmail());
-        userEntity.set_country(regDto.getCountry());
+        userEntity.set_name(regDto.getName());
 
 
-        GamesEntity gamesEntity = new GamesEntity();
-
-        gamesEntity.setUserEntity(userEntity);
-
-        userEntity.set_games(gamesEntity);
-
-
-
-       // userDaoImp.createGames(gamesEntity);
 
         userDaoImp.createUser(userEntity);
 
