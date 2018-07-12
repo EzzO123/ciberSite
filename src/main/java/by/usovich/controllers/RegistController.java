@@ -65,10 +65,5 @@ public class RegistController {
         return "regis";
     }
 
-    @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String emptyUrl(HttpSession session, Model model) {
 
-
-        return "index";
-    }
 }

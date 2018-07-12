@@ -34,24 +34,36 @@
                     <li class="nav-games__item nav-item active" ><a  class="nav-games__link nav-link" href="../main-page-paragon"><span>Paragon</span></a></li>
                     <li class="nav-games__item nav-item active" ><a  class="nav-games__link nav-link" href="../main-page-dota"><span>Dota 2</span></a></li>
                 </ul>
-                <div class="account-option"><span class="login login__icon"><a href="../login">Вход</a>
-                 </span><span>/</span><span class="registration"><a href="../reg">Регистрация</a></span></div>
+                <c:choose>
+                    <c:when test="${isExist == false}">
+                        <div class="account-option"><span class="login login__icon"><a href="../login.html">Вход</a>
+                            </span><span>/</span><span class="registration"><a href="../registration.html">Регистрация</a></span></div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="account-option"><span class="login login__icon"><a>${login}</a>
+                <div class="account-option__actions-list">
+                  <ul class="account-option__list">
+                    <li class="account-option__item"><a class="account-option__link" href = "createNewsPage">Написать новость</a></li>
+                    <li class="account-option__item"><a class="account-option__link" href = "createSteamOrVideoPage">Добавить стрим или видео</a></li>
+                    <li class="account-option__item"><a class="account-option__link" href = "deletePostsPage">Удалить пост</a></li>
+                    <li class="account-option__item"><a class="account-option__link" href = "">Добавить матч</a></li>
+                      <li class="account-option__item"><a class="account-option__link" href = "/getViewPage">Просмотр постов</a></li>
+                  </ul>
+                </div></span><span> : </span><a>Здесь</a></div>
+                    </c:otherwise>
+                </c:choose>
             </div>
 
         </nav>
         <div class="login-block">
             <h2>Вход</h2>
-            <form class="login-form" action="login" method="post">
-                <fieldset>
-                    <div class="input">
-                        <label for="login">Логин/E-mail</label>
-                        <input name="nick" type="text" size="40" id="login" placeholder="Логин/E-mail">
-                    </div>
-                    <div class="input">
-                        <label for="password">Пароль</label>
-                        <input name="password" id="password" type="password" size="40" placeholder="Введите пароль">
-                    </div>
-                </fieldset>
+            <form id="login-form" class="login-form"  action="login" method="post">
+                <div class="login-input">
+                    <input name="nick" type="text" size="40" id="login" placeholder="Логин/E-mail">
+                </div>
+                <div class="login-input">
+                    <input name="password" id="password" type="password" size="40" placeholder="Введите пароль">
+                </div>
                 <button>Войти</button>
             </form>
         </div>

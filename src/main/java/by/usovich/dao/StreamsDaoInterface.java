@@ -15,4 +15,6 @@ public interface StreamsDaoInterface {
     void createStream(StreamEntity streamEntity);
 
     public void deleteStream(StreamEntity streamEntity);
+
+    StreamEntity getStreamById(int id);
 }

@@ -10,24 +10,41 @@ import java.util.Date;
  */
 public class NewsDto {
 
+    private String _id;
 
     private String _titel;
 
     private String _content;
 
+    private String _name;
+
     private String _newsId;
+
+    private String _person;
 
     private String _date;
 
     private String _image;
 
 
-    public NewsDto(String titel, String content, String date, String image,String newsId) {
+    public NewsDto(String titel, String content,String name, String date, String image,String newsId) {
         this._titel = titel;
         this._content = content;
+        this._name = name;
         this._newsId = newsId;
         this._date = date;
         this._image = image;
+    }
+
+    public NewsDto(String id,String titel, String content,String name, String date, String image,String newsId,String person) {
+        this._id = id;
+        this._titel = titel;
+        this._content = content;
+        this._name = name;
+        this._newsId = newsId;
+        this._date = date;
+        this._image = image;
+        this._person = person;
     }
 
     public String get_titel() {
@@ -66,5 +83,29 @@ public class NewsDto {
 
     public void set_newsId(String _newsId) {
         this._newsId = _newsId;
+    }
+
+    public String get_name() {
+        return _name;
+    }
+
+    public void set_name(String _name) {
+        this._name = _name;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
+    public String get_person() {
+        return _person;
+    }
+
+    public void set_person(String _person) {
+        this._person = _person;
     }
 }

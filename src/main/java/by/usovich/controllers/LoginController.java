@@ -6,6 +6,7 @@ import by.usovich.validators.LoginValidator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -61,16 +62,17 @@ public class LoginController {
 
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String Login(@ModelAttribute("userDto") LoginDto userDto, HttpSession session){
+    public String Login(@ModelAttribute("loginDto") LoginDto userDto, HttpSession session,Model model){
 
 
         System.out.println("\n" + userDto.getEmail() + "   " + userDto.getNick() + "   " + userDto.getPassword() + "   ");
 
-        if(userServiseImp.isLoginExists(userDto.getNick() +"") == true){
-            log.info("Login is here! : " + userDto.getNick());
+        if(userServiseImp.isLoginExists(userDto.getNick() +"") && userServiseImp.isPasswordExists(userDto.getPassword())){
+            session.setAttribute("isExist",true);
+            session.setAttribute("login",userDto.getNick());
+            System.out.println("------------------" + userDto.getNick());
+            return "redirect:main-page-wot";
         }
-
-
 
         return "login";
     }

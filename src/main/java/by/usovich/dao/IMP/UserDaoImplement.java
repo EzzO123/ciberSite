@@ -2,27 +2,60 @@ package by.usovich.dao.IMP;
 
 import by.usovich.dao.UserDaoInterface;
 import by.usovich.entity.UserEntity;
+
+
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
 import java.util.List;
 
 /**
  * Created by yanus on 7/14/2017.
  */
 @Repository("userDaoImp")
-@Transactional
+@Transactional(noRollbackFor=Exception.class)
 public class UserDaoImplement implements UserDaoInterface {
 
     @Resource(name = "sessionFactory")
     public SessionFactory sessionFactory;
 
-    public Logger log = Logger.getLogger(UserDaoImplement.class);
+    @Override
+    public Integer getVisitSite() {
+
+        StoredProcedureQuery query = null;
+        try {
+            //postEntity = getListAtHQL(HQL,login,paramInHQL,sessionFactory);
+            Session session = sessionFactory.getCurrentSession();
+            query = session
+                    .createStoredProcedureQuery("getAllVisit")
+                    .registerStoredProcedureParameter(1, Integer.class,
+                            ParameterMode.OUT);
+
+
+
+            query.execute();
+
+          //  System.out.println("" + query.getOutputParameterValue(1));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Integer Int = (Integer) query.getOutputParameterValue(1);
+
+
+        return Int;
+    }
+
+    //   public Logger log = Logger.getLogger(UserDaoImplement.class);
 
     public boolean isLoginExists(String login){
 
@@ -31,7 +64,14 @@ public class UserDaoImplement implements UserDaoInterface {
 
         List postEntity = null;
         try {
-            postEntity = getListAtHQL(HQL,login,paramInHQL,sessionFactory);
+            //postEntity = getListAtHQL(HQL,login,paramInHQL,sessionFactory);
+            Session session = sessionFactory.getCurrentSession();
+            Query query = session.createQuery(HQL);
+            query.setParameter(paramInHQL, login);
+            postEntity = query.getResultList();
+        //    return query.getResultList();
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,6 +92,7 @@ public class UserDaoImplement implements UserDaoInterface {
         List postEntity = null;
         try {
             postEntity = getListAtHQL(postHQL,email,paramInHQL,sessionFactory);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,7 +129,7 @@ public class UserDaoImplement implements UserDaoInterface {
     public void createUser(UserEntity userEntity) {
 
         sessionFactory.getCurrentSession().save(userEntity);
-        log.info("UserEntiry add in BD ");
+    //    log.info("UserEntiry add in BD ");
 
     }
 
@@ -98,11 +139,13 @@ public class UserDaoImplement implements UserDaoInterface {
     public void deleteUser(UserEntity userEntity) {
 
         sessionFactory.getCurrentSession().delete(userEntity);
-        log.info("UserEntiry delete from BD ");
+      //  log.info("UserEntiry delete from BD ");
     }
 
     @Override
     public void updateUser(UserEntity userEntity) {
+
+        sessionFactory.getCurrentSession().update(userEntity);
 
     }
 
@@ -125,7 +168,8 @@ public class UserDaoImplement implements UserDaoInterface {
         return postEntity;
     }
 
-    private List getListAtHQL(String HQL, String required, String paramInHQL, SessionFactory sessionFactory) throws Exception{//Топовое блбла но как назвать не знаю//ToDo
+
+    private List getListAtHQL(String HQL, String required, String paramInHQL, SessionFactory sessionFactory) {//Топовое блбла но как назвать не знаю//ToDo
 
             Session session = sessionFactory.getCurrentSession();
             Query query = session.createQuery(HQL);

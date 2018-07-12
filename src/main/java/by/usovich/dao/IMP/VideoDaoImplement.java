@@ -1,8 +1,6 @@
 package by.usovich.dao.IMP;
 
 import by.usovich.dao.VideoDaoInterface;
-import by.usovich.entity.StreamEntity;
-import by.usovich.entity.UserEntity;
 import by.usovich.entity.VideoEntity;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -56,11 +54,46 @@ public class VideoDaoImplement implements VideoDaoInterface{
         log.info("Video entity add in BD ");
     }
 
-    public void deleteStream(StreamEntity streamEntity) {
+    @Override
+    public void deleteVideo(VideoEntity videoEntity) {
 
-        sessionFactory.getCurrentSession().delete(streamEntity);
+        sessionFactory.getCurrentSession().delete(videoEntity);
         log.info("UserEntiry delete from BD ");
     }
+
+    @Override
+    public VideoEntity getVideoById(int id) {
+        System.out.println("DAO(Id : " + id + ")");
+        String postHQL = "FROM VideoEntity WHERE video_id=:id";
+
+        //titel = "tableDOTA";
+        List videoEntity = null;
+        org.hibernate.query.Query query = null;
+        Session session = null;
+
+
+        try {
+            session = sessionFactory.getCurrentSession();
+            query = session.createQuery(postHQL);
+            query.setParameter("id", id+ "");
+            videoEntity = query.getResultList();
+
+        } catch (Exception e) {
+            System.out.println("Exception : " + e);
+        }
+
+        if(videoEntity == null){
+            return null;
+        }
+
+        if(videoEntity.size() > 0){
+            return (VideoEntity) videoEntity.get(0);
+        }
+
+        return null;
+    }
+
+
 
 
 }

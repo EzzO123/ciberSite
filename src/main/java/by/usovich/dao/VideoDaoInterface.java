@@ -1,6 +1,5 @@
 package by.usovich.dao;
 
-import by.usovich.entity.StreamEntity;
 import by.usovich.entity.VideoEntity;
 
 import java.util.List;
@@ -10,9 +9,11 @@ import java.util.List;
  */
 public interface VideoDaoInterface {
 
-    public List getVideoAtTitel(String nameGameTable);
+    List getVideoAtTitel(String nameGameTable);
 
     void createVideo(VideoEntity videoEntity);
 
-    public void deleteStream(StreamEntity streamEntity);
+    void deleteVideo(VideoEntity videoEntity);
+
+    VideoEntity getVideoById(int id);
 }

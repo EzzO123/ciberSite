@@ -5,6 +5,8 @@ package by.usovich.dto.StreamAndVideoDto.VideoDto;
  */
 public class VideoDto {
 
+    private String _id;
+
     private String _titel;
 
     private String _name;
@@ -15,12 +17,29 @@ public class VideoDto {
 
     private String _data;
 
-    public VideoDto(String titel, String name, String refVideo, String refImage, String data) {
-        this._titel = titel;
-        this._name = name;
-        this._refVideo = refVideo;
-        this._refImage = refImage;
-        this._data = data;
+    public VideoDto(String _titel, String _name, String _refVideo, String _refImage, String _data) {
+        this._titel = _titel;
+        this._name = _name;
+        this._refVideo = _refVideo;
+        this._refImage = _refImage;
+        this._data = _data;
+    }
+
+    public VideoDto(String _id, String _titel, String _name, String _refVideo, String _refImage, String _data) {
+        this._id = _id;
+        this._titel = _titel;
+        this._name = _name;
+        this._refVideo = _refVideo;
+        this._refImage = _refImage;
+        this._data = _data;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String get_titel() {

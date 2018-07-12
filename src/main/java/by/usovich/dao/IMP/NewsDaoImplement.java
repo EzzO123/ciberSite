@@ -64,5 +64,35 @@ public class NewsDaoImplement implements NewsDaoInterface {
         log.info("News delete from BD ");
     }
 
+    @Override
+    public NewsEntity getNewsById(int id) {
+        System.out.println("DAO(Id : " + id + ")");
+        String postHQL = "FROM NewsEntity WHERE news_id=:id";
 
+        //titel = "tableDOTA";
+        List newsEntity = null;
+        org.hibernate.query.Query query = null;
+        Session session = null;
+
+
+        try {
+            session = sessionFactory.getCurrentSession();
+            query = session.createQuery(postHQL);
+            query.setParameter("id", id+ "");
+            newsEntity = query.getResultList();
+
+        } catch (Exception e) {
+            System.out.println("Exception : " + e);
+        }
+
+        if(newsEntity == null){
+            return null;
+        }
+
+        if(newsEntity.size() > 0){
+            return (NewsEntity) newsEntity.get(0);
+        }
+
+        return null;
+    }
 }

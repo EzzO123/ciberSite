@@ -9,10 +9,12 @@ import java.util.*;
  */
 public interface NewsDaoInterface {
 
-    public List getNewsAtTitel(String nameGameTable);
+    List getNewsAtTitel(String nameGameTable);
 
     void createNews(NewsEntity newsEntity);
 
-    public void deleteNews(NewsEntity newsEntity);
+    void deleteNews(NewsEntity newsEntity);
+
+    NewsEntity getNewsById(int id);
 
 }

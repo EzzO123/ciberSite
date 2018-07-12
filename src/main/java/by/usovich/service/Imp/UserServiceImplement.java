@@ -22,11 +22,49 @@ public class UserServiceImplement implements UserServiseInterface {
     @Autowired
     public UserDaoInterface userDaoImp;
 
+    @Override
+    public Integer getVisitTheSite() {
+
+
+        return  userDaoImp.getVisitSite();
+    }
+
+    @Override
+    public void incrementJoinInTheGame(String loginUser, String titelGame) {
+
+        UserEntity userEntity = (UserEntity)userDaoImp.getUserEntityByLogin(loginUser).get(0);
+
+        GamesEntity gamesEntity = userEntity.getGamesEntity();
+
+        switch (titelGame){
+
+            case "cs":
+                gamesEntity.setNumberVisitCs(gamesEntity.getNumberVisitCs()+1);
+                break;
+            case "wot":
+                gamesEntity.setNumberVisitWOT(gamesEntity.getNumberVisitWOT()+1);
+                break;
+            case "paragon":
+                gamesEntity.setNumberVisitParagon(gamesEntity.getNumberVisitParagon()+1);
+                break;
+            case "dota":
+                gamesEntity.setNumberVisitDota(gamesEntity.getNumberVisitDota()+1);
+                break;
+
+        }
+
+        userEntity.setGamesEntity(gamesEntity);
+
+        userDaoImp.updateUser(userEntity);
+
+       // System.out.println(userEntity.getGamesEntity() + "");
+    }
 
     public boolean isLoginExists(String login){
 
-        if(userDaoImp.isLoginExists(login)){
+        if(userDaoImp.getUserEntityByLogin(login).size() > 0){
             log.info("Login :" + login + " is in the BD");
+            System.out.println("" + (userDaoImp.getUserEntityByLogin(login).toString()));
             return true;
         }else {
             log.info("Login :" + login + " is NOT in the BD");
@@ -94,11 +132,7 @@ public class UserServiceImplement implements UserServiseInterface {
 
         GamesEntity gamesEntity = new GamesEntity();
 
-        gamesEntity.setUserEntity(userEntity);
-
-        userEntity.set_games(gamesEntity);
-
-
+        userEntity.setGamesEntity(gamesEntity);
 
        // userDaoImp.createGames(gamesEntity);
 

@@ -7,6 +7,8 @@ public class CreateNewsDto {
 
     private String titel;
 
+    private String name;
+
     private String content;
 
     private String refImage;
@@ -47,6 +49,14 @@ public class CreateNewsDto {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
 

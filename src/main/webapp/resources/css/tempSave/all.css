@@ -2221,7 +2221,8 @@ pre {
   .col-md-7 {
     width: 58.33333%; }
   .col-md-8 {
-    width: 66.66667%; }
+    width: 66.66667%;
+      height: 556px;}
   .col-md-9 {
     width: 75%; }
   .col-md-10 {
@@ -2327,7 +2328,9 @@ pre {
   .col-lg-7 {
     width: 58.33333%; }
   .col-lg-8 {
-    width: 66.66667%; }
+      height: 556px;
+    width: 66.66667%;
+    }
   .col-lg-9 {
     width: 75%; }
   .col-lg-10 {
@@ -6942,8 +6945,6 @@ input[type="search"], input[type="date"] {
   position: relative;
   display: inline-block;
   z-index: 10; }
-.login:hover .account-option__actions-list {
-    display: block; }
 
 .account-option__actions-list {
   display: none;
@@ -7503,6 +7504,7 @@ textarea {
   padding: 10px; }
 
 .news {
+  height: 100%;
   overflow: hidden; }
 
 .news__wrap {
@@ -7777,7 +7779,7 @@ p.news__preview-text {
   padding: .3em 1em .3em 0; }
 
 .videos {
-   }
+  height: 41%; }
   .videos h2 {
     margin-top: 0; }
 

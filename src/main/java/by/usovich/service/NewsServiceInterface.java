@@ -1,5 +1,6 @@
 package by.usovich.service;
 
+import by.usovich.dto.NewsDto.CreateNewsDto;
 import by.usovich.dto.NewsDto.NewsJsonDto;
 
 import javax.servlet.http.HttpSession;
@@ -9,8 +10,14 @@ import javax.servlet.http.HttpSession;
  */
 public interface NewsServiceInterface {
 
-    public NewsJsonDto getNewsAtNameGame(String nameTheme, String numberOfPosts);
+    NewsJsonDto getNewsAtNameGame(String nameTheme, String numberOfPosts);
 
-    public NewsJsonDto getNewsAtNameGame(String nameTheme,String newsDeriction, String numberOfPosts, HttpSession session);
+    NewsJsonDto getNewsAtNameGame(String nameTheme);
+
+    NewsJsonDto getNewsAtNameGame(String nameTheme,String newsDeriction, String numberOfPosts, HttpSession session);
+
+    boolean setNewsInBD(CreateNewsDto createNewsDto);
+
+    boolean deleteNews(int id);
 
 }

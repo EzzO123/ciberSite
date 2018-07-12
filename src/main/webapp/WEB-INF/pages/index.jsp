@@ -24,187 +24,6 @@
 </head>
 
 <body>
-<div class="chat chat--aside">
-    <div class="l-chat__toggle">
-        <button onclick="toggle()" class="chat__toggle">Ч<br/>А<br/>Т</button>
-    </div>
-    <div class="chat__wrap">
-        <div class="chat__team">Командный чат</div>
-    </div>
-    <div class="chat-container tab-content">
-        <ul id="team-chat" class="chat__dialog tab-pane fade in active">
-            <li class="chat__messenge"><a data-peer='143' class="chat_ban-actions"></a>
-                <div class="chat__user">
-                    <div class="chat__avatar"><img src="https://support.rockstargames.com/system/photos/0001/4510/9157/profile_image_877736018_61840.png"></div><em class="chat__user-name">Marcus_loo</em><em class="chat__time">21:32</em>
-                </div>
-                <p class="chat__messenge-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus, consectetur non ea laboriosam officiis rem quas error architecto repellat!
-
-
-
-                </p>
-            </li>
-            <li class="chat__messenge"><a data-peer='143' class="chat_ban-actions"></a>
-                <div class="chat__user">
-                    <div class="chat__avatar"><img src="https://support.rockstargames.com/system/photos/0001/4510/9157/profile_image_877736018_61840.png"></div><em class="chat__user-name">Marcus_loo</em><em class="chat__time">21:32</em>
-                </div>
-                <p class="chat__messenge-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus, consectetur non ea laboriosam officiis rem quas error architecto repellat!
-
-
-
-                </p>
-            </li>
-            <li class="chat__messenge"><a data-peer='143' class="chat_ban-actions"></a>
-                <div class="chat__user">
-                    <div class="chat__avatar"><img src="https://support.rockstargames.com/system/photos/0001/4510/9157/profile_image_877736018_61840.png"></div><em class="chat__user-name">Marcus_loo</em><em class="chat__time">21:32</em>
-                </div>
-                <p class="chat__messenge-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus, consectetur non ea laboriosam officiis rem quas error architecto repellat!
-
-
-
-                </p>
-            </li>
-            <li class="chat__messenge"><a data-peer='143' class="chat_ban-actions"></a>
-                <div class="chat__user">
-                    <div class="chat__avatar"><img src="https://support.rockstargames.com/system/photos/0001/4510/9157/profile_image_877736018_61840.png"></div><em class="chat__user-name">Marcus_loo</em><em class="chat__time">21:32</em>
-                </div>
-                <p class="chat__messenge-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus, consectetur non ea laboriosam officiis rem quas error architecto repellat!
-
-
-
-                </p>
-            </li>
-            <li class="chat__messenge"><a data-peer='143' class="chat_ban-actions"></a>
-                <div class="chat__user">
-                    <div class="chat__avatar"><img src="https://support.rockstargames.com/system/photos/0001/4510/9157/profile_image_877736018_61840.png"></div><em class="chat__user-name">Marcus_loo</em><em class="chat__time">21:32</em>
-                </div>
-                <p class="chat__messenge-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus, consectetur non ea laboriosam officiis rem quas error architecto repellat!
-
-
-
-                </p>
-            </li>
-            <li class="chat__messenge"><a data-peer='143' class="chat_ban-actions"></a>
-                <div class="chat__user">
-                    <div class="chat__avatar"><img src="https://support.rockstargames.com/system/photos/0001/4510/9157/profile_image_877736018_61840.png"></div><em class="chat__user-name">Marcus_loo</em><em class="chat__time">21:32</em>
-                </div>
-                <p class="chat__messenge-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus, consectetur non ea laboriosam officiis rem quas error architecto repellat!
-
-
-
-                </p>
-            </li>
-            <li class="chat__messenge"><a data-peer='143' class="chat_ban-actions"></a>
-                <div class="chat__user">
-                    <div class="chat__avatar"><img src="https://support.rockstargames.com/system/photos/0001/4510/9157/profile_image_877736018_61840.png"></div><em class="chat__user-name">Marcus_loo</em><em class="chat__time">21:32</em>
-                </div>
-                <p class="chat__messenge-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus, consectetur non ea laboriosam officiis rem quas error architecto repellat!
-
-
-
-                </p>
-            </li>
-            <li class="chat__messenge"><a data-peer='143' class="chat_ban-actions"></a>
-                <div class="chat__user">
-                    <div class="chat__avatar"><img src="https://support.rockstargames.com/system/photos/0001/4510/9157/profile_image_877736018_61840.png"></div><em class="chat__user-name">Marcus_loo</em><em class="chat__time">21:32</em>
-                </div>
-                <p class="chat__messenge-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus, consectetur non ea laboriosam officiis rem quas error architecto repellat!
-
-
-
-                </p>
-            </li>
-            <li class="chat__messenge"><a data-peer='143' class="chat_ban-actions"></a>
-                <div class="chat__user">
-                    <div class="chat__avatar"><img src="https://support.rockstargames.com/system/photos/0001/4510/9157/profile_image_877736018_61840.png"></div><em class="chat__user-name">Marcus_loo</em><em class="chat__time">21:32</em>
-                </div>
-                <p class="chat__messenge-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus, consectetur non ea laboriosam officiis rem quas error architecto repellat!
-
-
-
-                </p>
-            </li>
-            <li class="chat__messenge"><a data-peer='143' class="chat_ban-actions"></a>
-                <div class="chat__user">
-                    <div class="chat__avatar"><img src="https://support.rockstargames.com/system/photos/0001/4510/9157/profile_image_877736018_61840.png"></div><em class="chat__user-name">Marcus_loo</em><em class="chat__time">21:32</em>
-                </div>
-                <p class="chat__messenge-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus, consectetur non ea laboriosam officiis rem quas error architecto repellat!
-
-
-
-                </p>
-            </li>
-            <li class="chat__messenge"><a data-peer='143' class="chat_ban-actions"></a>
-                <div class="chat__user">
-                    <div class="chat__avatar"><img src="https://support.rockstargames.com/system/photos/0001/4510/9157/profile_image_877736018_61840.png"></div><em class="chat__user-name">Marcus_loo</em><em class="chat__time">21:32</em>
-                </div>
-                <p class="chat__messenge-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus, consectetur non ea laboriosam officiis rem quas error architecto repellat!
-
-
-
-                </p>
-            </li>
-            <li class="chat__messenge"><a data-peer='143' class="chat_ban-actions"></a>
-                <div class="chat__user">
-                    <div class="chat__avatar"><img src="https://support.rockstargames.com/system/photos/0001/4510/9157/profile_image_877736018_61840.png"></div><em class="chat__user-name">Marcus_loo</em><em class="chat__time">21:32</em>
-                </div>
-                <p class="chat__messenge-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus, consectetur non ea laboriosam officiis rem quas error architecto repellat!
-
-
-
-                </p>
-            </li>
-            <li class="chat__messenge"><a data-peer='143' class="chat_ban-actions"></a>
-                <div class="chat__user">
-                    <div class="chat__avatar"><img src="https://support.rockstargames.com/system/photos/0001/4510/9157/profile_image_877736018_61840.png"></div><em class="chat__user-name">Marcus_loo</em><em class="chat__time">21:32</em>
-                </div>
-                <p class="chat__messenge-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda temporibus, consectetur non ea laboriosam officiis rem quas error architecto repellat!
-
-
-
-                </p>
-            </li>
-        </ul>
-        <div class="chat-container__toBottom l-chat-container__toBottom">
-            <button id="toBottom" class="toBottom"><img src="${pageContext.request.contextPath}/resources/img/down-arrow.svg"></button>
-        </div>
-        <div class="chat__send-messenge">
-            <textarea name="text" cols="40" rows="5" placeholder="Введите сообщение" id="chat__input-text" class="chat__input-text"></textarea>
-            <button id="chat__button" class="chat__button">Отправить</button>
-        </div>
-    </div>
-</div>
-<div class="ban-actions-menu">
-    <form action="/context-path/ServletName" method="post"><a><span aria-hidden="true" class="ban-actions-menu__close">X</span></a>
-        <ul class="ban-actions__list"><span>Бан на:</span>
-            <li>
-                <input type="radio" name="ban" id="ban-1" value="1"> 1 час
-            </li>
-            <li>
-                <input type="radio" name="ban" id="ban-2" value="2"> 2 часа
-            </li>
-            <li>
-                <input type="radio" name="ban" id="ban-3" value="4"> 4 часа
-            </li>
-            <li>
-                <input type="radio" name="ban" id="ban-4" value="inf"> Вечность
-            </li>
-        </ul>
-    </form>
-    <input type="submit" value="Забанить" class="ban-actions__act">
-</div>
 
 
 
@@ -219,8 +38,24 @@
                     <li class="nav-games__item nav-item active" ><a  class="nav-games__link nav-link" href="../main-page-paragon"><span>Paragon</span></a></li>
                     <li class="nav-games__item nav-item active" ><a  class="nav-games__link nav-link" href="../main-page-dota"><span>Dota 2</span></a></li>
                 </ul>
-                <div class="account-option"><span class="login login__icon"><a href="../login">Вход</a>
-                </span><span>/</span><span class="registration"><a href="../reg">Регистрация</a></span></div>
+                <c:choose>
+                    <c:when test="${isExist == false}">
+                        <div class="account-option"><span class="login login__icon"><a href="../login.html">Вход</a>
+                            </span><span>/</span><span class="registration"><a href="/reg">Регистрация</a></span></div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="account-option"><span class="login login__icon"><a>${login}</a>
+                <div class="account-option__actions-list">
+                  <ul class="account-option__list">
+                    <li class="account-option__item"><a class="account-option__link" href = "createNewsPage">Написать новость</a></li>
+                    <li class="account-option__item"><a class="account-option__link" href = "createSteamOrVideoPage">Добавить стрим или видео</a></li>
+                    <li class="account-option__item"><a class="account-option__link" href = "deletePostsPage">Удалить пост</a></li>
+                    <li class="account-option__item"><a class="account-option__link" href = "">Добавить матч</a></li>
+                      <li class="account-option__item"><a class="account-option__link" href = "/getViewPage">Просмотр постов</a></li>
+                  </ul>
+                </div></span><span> : </span><a>Здесь</a></div>
+                    </c:otherwise>
+                </c:choose>
             </div>
 
         </nav>

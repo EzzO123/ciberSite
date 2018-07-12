@@ -25,7 +25,7 @@
     <div class="wrapper">
         <!--include ../templates/_nav-games-->
         <nav class="navbar header">
-            <button type="button" data-toggle="collapse" data-target="#adaptiveMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggle navbar-toggler-right"><span class="navbar-toggler-icon"></span></button><a href="index.html" class="navbar-brand"><img src="../img/besa-logo-light.svg"></a>
+            <button type="button" data-toggle="collapse" data-target="#adaptiveMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggle navbar-toggler-right"><span class="navbar-toggler-icon"></span></button><a href="index.html" class="navbar-brand"><img src="/resources/img/besa-logo-light.svg"></a>
             <div id="adaptiveMenu" class="collapse navbar-collapse">
                 <ul class="nav-gamess navbar-nav mr-auto">
                     <li class="nav-games__item nav-item active"><a href="main-page-csgo.html" class="nav-games__link nav-link"><span>CS GO</span></a></li>
@@ -33,21 +33,28 @@
                     <li class="nav-games__item nav-item active"><a href="main-page-paragon.html" class="nav-games__link nav-link"><span>Paragon</span></a></li>
                     <li class="nav-games__item nav-item active"><a href="main-page-dota.html" class="nav-games__link nav-link"><span>Dota 2</span></a></li>
                 </ul>
-                <div class="account-option"><span class="login login__icon"><a href="../login">Вход</a>
-                </span><span>/</span><span class="registration"><a href="../reg">Регистрация</a></span></div></div>
+                <c:choose>
+                <c:when test="${isExist == false}">
+                <div class="account-option"><span class="login login__icon"><a href="../login.html">Вход</a>
+                            </span><span>/</span><span class="registration"><a href="../registration.html">Регистрация</a></span></div>
+                </c:when>
+                <c:otherwise>
+                <div class="account-option"><span class="login login__icon"><a>${login}</a>
+                <div class="account-option__actions-list">
+                  <ul class="account-option__list">
+                    <li class="account-option__item"><a class="account-option__link" href = "createNewsPage">Написать новость</a></li>
+                    <li class="account-option__item"><a class="account-option__link" href = "createSteamOrVideoPage">Добавить стрим или видео</a></li>
+                    <li class="account-option__item"><a class="account-option__link" href = "deletePostsPage">Удалить пост</a></li>
+                    <li class="account-option__item"><a class="account-option__link" href = "">Добавить матч</a></li>
+                      <li class="account-option__item"><a class="account-option__link" href = "/getViewPage">Просмотр постов</a></li>
+                  </ul>
+                </div></span><span> : </span><a>Здесь</a></div>
+                </c:otherwise>
+                </c:choose>
         </nav>
         <div class="registration-block">
             <h2>Удаление постов</h2>
-            <form id="registration-form" class="registration-form" action="createNews" method="post">
-                <fieldset>
-                    <select name="titel">
-                        <option value="cs">CS GO</option>
-                        <option value="dota">DOTA</option>
-                        <option value="wot">WOT</option>
-                        <option value="paragon">PARAGON</option>
-                    </select>
-                </fieldset>
-
+            <form id="registration-form" class="registration-form" action="deletePost" method="post">
                 <fieldset>
                     <select  name="type">
                         <option  value="video">Video</option>

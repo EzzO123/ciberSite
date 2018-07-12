@@ -1,6 +1,7 @@
 package by.usovich.controllers;
 
 
+import by.usovich.dto.NewsDto.CreateNewsDto;
 import by.usovich.dto.NewsDto.NewsDto;
 import by.usovich.service.NewsServiceInterface;
 import java.util.*;
@@ -9,10 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,7 +25,7 @@ public class NewsController {
     //private final Logger;
 
     @Autowired
-    public NewsServiceInterface postServiceImp;
+    public NewsServiceInterface newsServiceImp;
 
 
     private static final Logger log = Logger.getLogger(NewsController.class);
@@ -36,7 +34,7 @@ public class NewsController {
 //    public String getNewPageWithNews(@RequestParam String titel, @RequestParam String number, HttpSession session, Model model){
 //
 //
-//        model.addAttribute("posts",postServiceImp.getNewsAtNameGame(titel,number).getMap());
+//        model.addAttribute("posts",newsServiceImp.getNewsAtNameGame(titel,number).getMap());
 //
 //        return "index";
 //    }
@@ -49,7 +47,7 @@ public class NewsController {
 
         Map<String,NewsDto> response = null;
 
-        return postServiceImp.getNewsAtNameGame(titel,number).getJsonArray().toString();
+        return newsServiceImp.getNewsAtNameGame(titel,number).getJsonArray().toString();
     }
 
 
@@ -63,7 +61,7 @@ public class NewsController {
 
         titel = "dota";
 
-        String string = postServiceImp.getNewsAtNameGame(titel,number).getJsonArray().toString();
+        String string = newsServiceImp.getNewsAtNameGame(titel,number).getJsonArray().toString();
 
         return string;
     }
@@ -77,7 +75,7 @@ public class NewsController {
        //ToDo
 
 
-        String string = postServiceImp.getNewsAtNameGame(titel,numStr).getJsonArray().toString();//for debbug
+        String string = newsServiceImp.getNewsAtNameGame(titel,numStr).getJsonArray().toString();//for debbug
 
         return string;
     }
@@ -96,7 +94,7 @@ public class NewsController {
         //ToDo
 
         System.out.println("NewsController : getNewsForCiberSite");
-        String string = postServiceImp.getNewsAtNameGame(theme,newsDeriction,newsPerPage,session).getJsonArray().toString();//for debbug
+        String string = newsServiceImp.getNewsAtNameGame(theme,newsDeriction,newsPerPage,session).getJsonArray().toString();//for debbug
 
 
 
@@ -104,4 +102,24 @@ public class NewsController {
         return string;
     }
 
+    @RequestMapping( value = "/createNews", method = RequestMethod.POST)
+    public String setCreateNews(HttpSession session, @ModelAttribute("CreateNewsDto")CreateNewsDto createNewsDto) {
+
+        System.out.println("Well done");
+
+
+
+        System.out.println("Titel :" + createNewsDto.getTitel());
+
+        System.out.println("Content :" + createNewsDto.getContent());
+
+        System.out.println("Name :" + createNewsDto.getName());
+
+        System.out.println("refImage :" + createNewsDto.getRefImage());
+
+        System.out.println("Date :" + createNewsDto.getDate());
+
+        System.out.println(newsServiceImp.setNewsInBD(createNewsDto) + "Good!!!");
+        return "createNews";
+    }
 }

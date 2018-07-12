@@ -2,7 +2,6 @@ package by.usovich.dao.IMP;
 
 import by.usovich.dao.StreamsDaoInterface;
 import by.usovich.entity.StreamEntity;
-import by.usovich.entity.UserEntity;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -57,11 +56,43 @@ public class StreamDaoImplement implements StreamsDaoInterface {
 
     }
 
+    @Override
     public void deleteStream(StreamEntity streamEntity) {
 
         sessionFactory.getCurrentSession().delete(streamEntity);
         log.info("UserEntiry delete from BD ");
     }
 
+    @Override
+    public StreamEntity getStreamById(int id) {
+        System.out.println("DAO(Id : " + id + ")");
+        String postHQL = "FROM StreamEntity WHERE streams_id=:id";
+
+        //titel = "tableDOTA";
+        List streamEntity = null;
+        org.hibernate.query.Query query = null;
+        Session session = null;
+
+
+        try {
+            session = sessionFactory.getCurrentSession();
+            query = session.createQuery(postHQL);
+            query.setParameter("id", id+ "");
+            streamEntity = query.getResultList();
+
+        } catch (Exception e) {
+            System.out.println("Exception : " + e);
+        }
+
+        if(streamEntity == null){
+            return null;
+        }
+
+        if(streamEntity.size() > 0){
+            return (StreamEntity) streamEntity.get(0);
+        }
+
+        return null;
+    }
 
 }

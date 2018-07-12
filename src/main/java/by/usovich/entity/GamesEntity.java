@@ -17,19 +17,6 @@ public class GamesEntity implements Serializable  {
 
   //  @OneToOne(cascade = CascadeType.ALL, mappedBy = "games")
 
-
-    //ToDo Error in BD
-      @OneToOne(mappedBy = "games")
-      private UserEntity userEntity;
-
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
-    }
-
     @Id
     @Column(name = "games_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,7 +34,32 @@ public class GamesEntity implements Serializable  {
     @Column(name = "games_numberVisitWOT")
     private int numberVisitWOT ;
 
+    @OneToOne(mappedBy = "gamesEntity")
+    private UserEntity userEntity;
 
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
+
+    public GamesEntity(int numberVisitDota, int numberVisitParagon, int numberVisitCs, int numberVisitWOT) {
+        this.numberVisitDota = numberVisitDota;
+        this.numberVisitParagon = numberVisitParagon;
+        this.numberVisitCs = numberVisitCs;
+        this.numberVisitWOT = numberVisitWOT;
+      //  this.userEntity = userEntity;
+    }
+
+    public GamesEntity() {
+        this.numberVisitDota = 0;
+        this.numberVisitParagon = 0;
+        this.numberVisitCs = 0;
+        this.numberVisitWOT = 0;
+
+    }
 
     public int get_id() {
         return _id;
@@ -88,4 +100,6 @@ public class GamesEntity implements Serializable  {
     public void setNumberVisitWOT(int numberVisitWOT) {
         this.numberVisitWOT = numberVisitWOT;
     }
+
+
 }

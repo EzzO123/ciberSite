@@ -23,53 +23,117 @@ $(document).ready(function() {
           newsPageDirectly = localStorage.getItem('pageNumber');
           console.log('pageNumber from store ', localStorage.getItem('pageNumber'));
       }
-      // Когда страница загр. делаем запрос на первую стр новостей
-     /*
-      $(document).ready(function(e) {
-            if (!isLoaded) return;
-            var headerHeight = $(".news__header").css("height"),
-                newsContainer = $(".news__container"),
-                newsPosts = newsContainer.children(),
-                pageInfo,
-                sendNewsParams;
+      function fillBlankByNewsForViewPage(obj) {
+          newsItem = $(
+              '<tr >' +
+              '<th>' + obj.id +'</th>' +
+              '<th>' + obj.name +'</th>' +
+              '<th>' + obj.Image +'</th>' +
+              '<th>' + obj.any +'</th>' +
+              '<th>' + obj.date +'</th>' +
+              '<th>' + obj.any +'</th>' +
+              '</tr>'
 
-            var pageTitleId = getIdOfPage(directlyPageTitle);
-            newsPageDirectly = 1;
+          );
+          return newsItem;
+      }
+      function fillBlankByNewsForViewPage_Default(any) {
+          newsItem = $(
+              '<tr >' +
+              '<th>' + 'id' +'</th>' +
+              '<th>' + 'name' +'</th>' +
+              '<th>' + 'Image' +'</th>' +
+              '<th>' + 'date' +'</th>' +
+              '<th>' + any +'</th>' +
+              '</tr>'
 
-            sendNewsParams = {
-                theme: 2,
-                page: newsPageDirectly,
-                newsPerPage: 3
-            }
+          );
+          return newsItem;
+      }
 
-            getNewPosts("/News/GetPagedNews", sendNewsParams, replaceNewsPosts);
 
-            //Замена новыми постами
-            function replaceNewsPosts(result) {
-                newsContainer.css("opacity", 0);
-                isLoaded = false;
-                pageInfo = result.PageInfo;
+      $('#selectTable').change(function() {
+          alert('The option with value ' + $(this).val() + ' and text ' + $(this).text() + ' was selected.' + $('#selectTitel').val());
+          getPostsForViewPage($(this).val(),$('#selectTitel').val())
+      });
 
-                setTimeout(function () {
-                    var newsArray = result.NewsViewModelList;
-                    newsArray.map(function (obj, index) {
-                        if (index > 2) return;
-                        newsContainer.append(fillBlank(obj));
-                    });
+      $('#selectTitel').change(function() {
+          alert('The option with value ' + $(this).val() + ' and text ' + $(this).text() + ' was selected.');
+          getPostsForViewPage($('#selectTable').val(),$(this).val())
+      });
 
-                    newsPosts.remove();
-                    $(".news__header").height(headerHeight);
-                    newsContainer.css("opacity", 1);
+      function getPostsForViewPage(table,titel) {
+          alert("GetNewsForViewPage");
 
-                    isLoaded = true;
-                },300);
-            }
+          console.log(document.title);
+          $.ajax({
+              type: "POST",
+              url: "http://localhost:8080/getPostForView",
+              data: ({
+                  titel: titel,
+                  table: table
+              }),
+              dataType: "JSON",
+              success: function (result) {
+                //  alert('ajax result' + result + ' 0 ' + result[0] + '  1  titel ' + result[1].titel)
+                  replaceNewsPostsForViewPage(result);
+
+              },
+              error: function (result) {
+                  //  newsPageDirectly = localStorage.getItem('pageNumber');
+                  console.log('result fail ', result);
+                 // var obj = jQuery.parseJSON( result);
+                 // var obj = JSON.parse(result);
+                  //)  alert('ajax result' + result + ' 0 ' + result[0] + '  1  titel ' + result[1])
+                 // alert('ajax json' + obj + ' 0 ' + obj[0] + '  1   ' + obj[1] + '  titel  ' + titel)
+                //  alert('ajax json' + json + ' 0 ' + json[0] + '  1   ' + json[1])
+
+
+              }
+
           });
-      */
+      }
 
-      //Когда страница прогружана, то сделать запрос на новости
+      function replaceNewsPostsForViewPage(result) {
+          //pageInfo = result.PageInfo;
+          //Если пустой список - оставить старые. Не заменять ничего
+          //    if(result.NewsViewModelList.lenght === 0) { return; }
 
-      // При нажатии на стрелки в блоке новостей отправка ajax за след/пред новостями
+          // localStorage.setItem('pageNumber', pageInfo.PageNumber);
+          //   console.log('replaceNewsPosts -- newsPageDirectly ', pageInfo.PageNumber);
+
+
+          var headerHeight = $("#tableOfPost").css("height")
+
+          var newsContainer = $("#tableOfPost");
+          var newsPosts = newsContainer.children();
+
+          //newsPosts.remove();
+
+          newsContainer.css("opacity", 0);
+          isLoaded = false;
+
+          console.log('height : ' + headerHeight);
+          setTimeout(function () {
+              var newsArray  = Array.prototype.slice.call(result);
+              console.log('array : ' + newsArray[0].anyKey);
+              newsContainer.append(fillBlankByNewsForViewPage_Default('Content'));
+              newsArray.map(function (obj, index) {
+                  newsContainer.append(fillBlankByNewsForViewPage(obj));
+                  console.log('!!!!!!!!!!!!       0');
+              });
+
+              newsPosts.remove();
+              $("#tableOfPost").height(headerHeight);
+              newsContainer.css("opacity", 1);
+
+              isLoaded = true;
+          },300);
+      }
+
+
+
+
       $(".news").on("click", getNews);
 
       function getNews(e) {
@@ -159,7 +223,7 @@ $(document).ready(function() {
         newsItem = $(
             '<div class="news__item">' +
             '<div class="news__img">' +
-            '<a href="#"><img src="' +obj.Image +'"></a>' +
+            '<img src="' +obj.Image +'">' +
             '</div>' +
             '<div class="news_tag">Новости</div>' +
             '<h4 class="news__header">' +
@@ -179,6 +243,7 @@ $(document).ready(function() {
         );
         return newsItem;
       }
+
 
       function getNewPosts( newsParams, callback) {
           alert("GetNews");

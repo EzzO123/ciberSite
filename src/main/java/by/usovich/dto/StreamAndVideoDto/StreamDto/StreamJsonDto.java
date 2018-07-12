@@ -82,5 +82,28 @@ public class StreamJsonDto {
         counter++;
     }
 
+    public void putPostInJsonForViewPage(StreamDto post) {
+        try {
+            JSONObject jsonObject = new JSONObject();
+
+            jsonObject.put("id", post.get_id());
+            jsonObject.put("titel", post.get_titel());
+            jsonObject.put("any", post.get_refVideo());
+            jsonObject.put("anyKey", "RefVideo");
+            jsonObject.put("name", post.get_name());
+            jsonObject.put("date", post.get_data());
+            jsonObject.put("Image", post.get_refImage());
+
+            jsonArray.put(jsonObject);
+
+        } catch (JSONException E) {
+
+            System.out.println("Errro in Dto(Post) : problem with parse object to json");
+
+        }
+        //  map.put(counter + "",post);
+        counter++;
+    }
+
 
 }

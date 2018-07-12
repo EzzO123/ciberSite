@@ -46,6 +46,20 @@ public class NewsServiceImplement implements NewsServiceInterface {
         return false;
     }
 
+    @Override
+    public boolean deleteNews(int id) {
+
+        NewsEntity newsEntity =newsDaoImp.getNewsById(id);
+
+        if(!(newsEntity == null)){
+
+            newsDaoImp.deleteNews(newsEntity);
+            return true;
+        }
+
+        return false;
+    }
+
     @Autowired
     public NewsDaoInterface PostDaoImp;
 
@@ -87,6 +101,43 @@ public class NewsServiceImplement implements NewsServiceInterface {
                     }
 
                     postsJsonDto.putPost(getPostEntityInPostDto((NewsEntity) postsEntity.get(sizeList - temp - 1)));//Получение из списка ENITITYpost в DTOpost
+                }
+            }
+
+        }
+
+
+        return postsJsonDto;//DAO
+    }
+
+    @Override
+    public NewsJsonDto getNewsAtNameGame(String nameTheme) {
+        NewsJsonDto postsJsonDto = new NewsJsonDto();
+
+     //if (getNameTablePost(nameTheme).equals("")) {
+
+        if (getNameTablePost(getTitelFromTheme(nameTheme)).equals("")) {
+            //Debbug
+
+
+        } else {
+
+            List postsEntity = null;//список постов для парса в Map(Controller)
+            postsEntity = PostDaoImp.getNewsAtTitel(getNameTablePost(getTitelFromTheme(nameTheme)));
+
+            if (postsEntity.size() == 0) {
+
+                log.error("Сущность не получена");
+
+            } else {
+
+                log.info("Сущность получена");
+
+                for (int temp = 0; temp < postsEntity.size(); temp++) {//получение последних постов добавленных в БД
+
+                    int sizeList = postsEntity.size();
+
+                    postsJsonDto.putPostInJsonForViewPage(getPostEntityInPostDto((NewsEntity) postsEntity.get(sizeList - temp - 1)));//Получение из списка ENITITYpost в DTOpost
                 }
             }
 
@@ -219,11 +270,33 @@ public class NewsServiceImplement implements NewsServiceInterface {
         if(false){
             return null;
         }else{
-            return new NewsDto(postEntity.get_titel(),postEntity.get_content(),
-                    postEntity.get_date(),postEntity.get_image(),postEntity.get_id() +"");
+            return new NewsDto(postEntity.get_id() + "",postEntity.get_titel(),postEntity.get_content(),postEntity.get_name(),
+                    postEntity.get_date(),postEntity.get_image(),postEntity.get_id() +"","");
         }
 
     }
+
+   public boolean setNewsInBD(CreateNewsDto createNewsDto){
+       if(!(createNewsDto.getName().equals(null) && createNewsDto.getName().equals(null)
+               && createNewsDto.getName().equals(null))){
+
+               NewsEntity newsEntity = new NewsEntity();
+
+               newsEntity.set_titel(getNameTablePost(createNewsDto.getTitel()));
+               newsEntity.set_content(createNewsDto.getContent());
+               newsEntity.set_name(createNewsDto.getName());
+               newsEntity.set_image(createNewsDto.getRefImage());
+               newsEntity.set_date("---------");
+
+               newsDaoImp.createNews(newsEntity);
+
+               return true;
+
+       }
+
+
+        return false;
+   }
 
 
 

@@ -24,6 +24,9 @@ public class NewsEntity implements Serializable {
     @Column(name = "news_content")
     private String _content;
 
+    @Column(name = "news_name")
+    private String _name;
+
 
     //ToDo//Need use type Date
     @Column(name = "news_date")
@@ -56,6 +59,14 @@ public class NewsEntity implements Serializable {
         this._content = _content;
     }
 
+    public String get_name() {
+        return _name;
+    }
+
+    public void set_name(String _name) {
+        this._name = _name;
+    }
+
     public String get_date() {
         return _date;
     }
@@ -71,5 +82,6 @@ public class NewsEntity implements Serializable {
     public void set_image(String _image) {
         this._image = _image;
     }
+
 }
 

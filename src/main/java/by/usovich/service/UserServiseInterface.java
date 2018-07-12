@@ -10,13 +10,18 @@ import by.usovich.entity.UserEntity;
  */
 public interface UserServiseInterface {
 
-    public boolean isLoginExists(String login);
+    boolean isLoginExists(String login);
 
-    public boolean isEmailExists(String email);
+    boolean isEmailExists(String email);
 
-    public boolean isPasswordExists(String password);
+    boolean isPasswordExists(String password);
 
     void createUser(RegDto profile);
 
     void deleteUser(UserDto profile);
+
+    void incrementJoinInTheGame(String loginUser,String titelGame);
+
+    Integer getVisitTheSite();
+
 }
